@@ -1,0 +1,23 @@
+---
+---
+<h1><slot /></h1>
+<style>
+    h1 {
+        font-size: 3rem;
+		font-weight: bold;
+		text-align: center;
+		color: var(--accent-dark);
+        margin-bottom: 3rem;
+        animation: fade-in 1.5s ease-in-out;
+    }
+    @keyframes fade-in {
+        from {
+            opacity: 0;
+            transform: translateY(0.5rem);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+</style>

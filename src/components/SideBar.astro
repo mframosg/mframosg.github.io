@@ -1,0 +1,65 @@
+---
+---
+<aside>
+    <a href="/">0</a>
+    <a href="#momento1">1</a>
+    <a href="#momento2">2</a>
+    <a href="#momento3">3</a>
+    <a href="#momento4">4</a>
+</aside>
+<style>
+    aside {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100px;
+        height: 100vh;
+        padding: 4rem 2rem;
+        background: var(--accent-light);
+        box-shadow: 0px 4px 4px 3px rgba(144 58 87 / 0.2);
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+    }
+    a {
+        text-decoration: none;
+        position: relative;
+        width: 55px;
+        height: 55px;
+        font-size: 1rem;
+        background: transparent;
+        border: 2px solid var(--accent-dark);
+        border-radius: 50%;
+        margin-bottom: 4rem;
+        line-height: 0;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        
+        font-weight: bold;
+        font-size: 1.2rem;
+        color: var(--accent-dark);
+    }
+    a::after {
+        content: "";
+        top: 3.7rem;
+        left: calc(50% - 1px);
+        position: absolute;
+        display: block;
+        width: 3px;
+        height: 3rem;
+        background-color: var(--accent-dark);
+        margin: 0 auto;
+    }
+    aside a:last-child::after {
+        display: none;
+    }
+
+    a:hover {
+        background: var(--accent-dark);
+        color: var(--accent-light);
+    }
+    
+</style>
