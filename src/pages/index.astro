@@ -8,78 +8,108 @@ import Button from '../components/Button.astro';
 
 <Layout title="Cumpleaños 23">
 	<SideBar />
-	<section id="momento0">
+	<section id="momento0" class="hero">
 		<Title>Lista de actividades para mi pequeña Golden Retriever</Title>
-		<div>
-			<p>¡Feliz cumpleaños! 🎉</p>
-			<p>Para celebrar tu día, he preparado un día especial con actividades. 
-				¡Espero que disfrutes de cada momento! 🎂🎈</p>
+		<div class="hero-grid">
+			<div class="hero-text">
+				<p class="hero-kicker">¡Feliz cumpleaños! 🎉</p>
+				<p>
+					Para celebrar tu día, he preparado un día especial con actividades.
+					¡Espero que disfrutes de cada momento! 🎂🎈
+				</p>
+				<p class="hero-note">¡Ajam! ¡Esa golden chitita eres tú! 🐶</p>
+			</div>
+			<figure class="hero-media">
+				<img src="golden1.jpeg" alt="Golden Retriever" />
+			</figure>
 		</div>
-		<img src="golden1.jpeg" class="w-[600px] m-auto" alt="Golden Retriever" />
-		<p>¡Ajam! ¡Esa golden chitita eres tú! 🐶</p>
-
 	</section>
 
 	<!-- Momento 1: Desayuno -->
 	<section id="momento1" class="moment">
 		<Title>Desayuno</Title>
-		<div>
-			<p>Para comenzar este día especial, te he preparado un desayuno sorpresa. ¡Espero que te guste!</p>
-			<img src="desayuno.png" alt="Desayuno" class="img-fluid">
-			<p> <strong>Hora:</strong>  8:00 a.m. <br>
-				<strong>Lugar:</strong>  Mi casa. <br>
-				<strong>Pista:</strong>  Tú me has enseñado a prepararlo.
-			</p>
+		<div class="moment-content">
+			<div class="moment-text">
+				<p>
+					Para comenzar este día especial, te he preparado un desayuno sorpresa.
+					¡Espero que te guste!
+				</p>
+				<p class="meta">
+					<strong>Hora:</strong> 8:00 a.m. <br />
+					<strong>Lugar:</strong> Mi casa. <br />
+					<strong>Pista:</strong> Tú me has enseñado a prepararlo.
+				</p>
+			</div>
+			<figure class="moment-media">
+				<img src="desayuno.png" alt="Desayuno" />
+			</figure>
 		</div>
 	</section>
 
 	<!-- Momento 2: Mapa de Tiendas -->
 	<section id="momento2" class="moment">
 		<Title>¡Nos vamos de compras!</Title>
-		<div>
-			<p>Ahora iremos de compras. ¡Para ello tengo las siguientes recomendaciones!</p>
-			<ul>
-				<Card href='https://onehalf.com.co/collections/inferiores-deportivos?page=1' imgSrc='https://cdn.shopify.com/s/files/1/0257/9981/9345/files/logo-amarillo-one-half_5bdbbf39-5b26-40c1-b8ec-45b4431ab99c.png' />
-				<Card href='https://roxieswimwear.com/products/falda-girly-negro' imgSrc='https://roxieswimwear.com/cdn/shop/files/LogoRoxSwim_Mesa_de_trabajo_1.png?v=1714681715' />
-				<Card href='https://www.stradivarius.com/co/mujer/ropa/jeans-n1953' imgSrc= 'https://www.cabosagroup.com/wp-content/uploads/2018/05/logo-stradivarius-300x97.png' />
-			</ul>
-			<p>
-				Me gusta darte regalos que tengan utilidad y no cosas por regalar, 
-				por eso este regalo está pensado en tus necesidades y gustos.
-				Te doy las siguientes opciones: <br>
-				De One Half me gustaría para ti un short y medias para entrenar, tampoco descartes algo urban, 
-				de Roxswim una falda que es un antojo que tienes desde hace rato, y de Stradivarius, 
-				aunque no tengo algo particular en mente, un jean nunca sobra. <br>
-				¡SI TIENES OTRAS OPCIONES POR FAVOR NO LAS OMITAS!
-			</p>
+		<div class="moment-content moment-content--reverse">
+			<div class="moment-text">
+				<p>
+					Ahora iremos de compras. ¡Para ello tengo las siguientes recomendaciones!
+				</p>
+				<p>
+					Me gusta darte regalos que tengan utilidad y no cosas por regalar,
+					por eso este regalo está pensado en tus necesidades y gustos.
+					Te doy las siguientes opciones: <br />
+					De One Half me gustaría para ti un short y medias para entrenar, tampoco descartes algo urban,
+					de Roxswim una falda que es un antojo que tienes desde hace rato, y de Stradivarius,
+					aunque no tengo algo particular en mente, un jean nunca sobra. <br />
+					¡SI TIENES OTRAS OPCIONES POR FAVOR NO LAS OMITAS!
+				</p>
+			</div>
+			<div class="moment-media">
+				<ul class="shops-grid">
+					<Card href='https://onehalf.com.co/collections/inferiores-deportivos?page=1' imgSrc='https://cdn.shopify.com/s/files/1/0257/9981/9345/files/logo-amarillo-one-half_5bdbbf39-5b26-40c1-b8ec-45b4431ab99c.png' />
+					<Card href='https://roxieswimwear.com/products/falda-girly-negro' imgSrc='https://roxieswimwear.com/cdn/shop/files/LogoRoxSwim_Mesa_de_trabajo_1.png?v=1714681715' />
+					<Card href='https://www.stradivarius.com/co/mujer/ropa/jeans-n1953' imgSrc= 'https://www.cabosagroup.com/wp-content/uploads/2018/05/logo-stradivarius-300x97.png' />
+				</ul>
+			</div>
 		</div>
 	</section>
 
 	<!-- Momento 3: Almuerzo -->
 	<section id="momento3" class="moment">
 		<Title>¡Tiempo de Almuerzo!</Title>
-		<div>
-			<p>Para continuar el día, vamos a almorzar. También es sorpresa ¡Ajam! sorpresa.</p>
-			<img src="almuerzo.png" alt="Desayuno" class="img-fluid">
-			<p> <strong>Hora:</strong>  12:30 p.m. <br>
-				<strong>Lugar:</strong> Solo déjate llevar <br>
-				<strong>Pista:</strong>  Lo comemos mucho, o tal vez sea la primera vez.
-			</p>
+		<div class="moment-content">
+			<div class="moment-text">
+				<p>
+					Para continuar el día, vamos a almorzar. También es sorpresa ¡Ajam! sorpresa.
+				</p>
+				<p class="meta">
+					<strong>Hora:</strong> 12:30 p.m. <br />
+					<strong>Lugar:</strong> Solo déjate llevar <br />
+					<strong>Pista:</strong> Lo comemos mucho, o tal vez sea la primera vez.
+				</p>
+			</div>
+			<figure class="moment-media">
+				<img src="almuerzo.png" alt="Desayuno" />
+			</figure>
 		</div>
 	</section>
 
 	<!-- Momento 4: Compartir en Familia -->
 	<section id="momento4" class="moment">
 		<Title>Compartir en familia</Title>
-		<div>
-			<p>Terminaremos este día especial compartiendo tarde en familia.</p>
-			<img src="family.jpeg" alt="Compartir en Familia" class="img-fluid">
-			<p>
-				Pero antes por aquí te dejo un botón secreto.
-			</p>
-			
-			<Button href="/secret" text="Botón secreto 🎁" />
-			
+		<div class="moment-content">
+			<div class="moment-text">
+				<p>
+					Terminaremos este día especial compartiendo tarde en familia.
+				</p>
+				<p>
+					Pero antes por aquí te dejo un botón secreto.
+				</p>
+				<Button href="/secret" text="Botón secreto 🎁" />
+			</div>
+			<figure class="moment-media">
+				<img src="family.jpeg" alt="Compartir en Familia" />
+			</figure>
 		</div>
 	</section>
 
@@ -87,55 +117,137 @@ import Button from '../components/Button.astro';
 
 <style>
 	section {
-		max-width: 1200px;
-		padding: 0 2rem;
-		margin: 3rem auto;
-
+		max-width: 1120px;
+		margin: 2.5rem auto;
+		padding: 0 1.5rem;
 	}
 
-	section div {
-		display: flex;
-		flex-direction: column;
+	.hero {
+		margin-top: 1.5rem;
+	}
+
+	.hero-grid {
+		display: grid;
+		grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+		gap: 2.5rem;
 		align-items: center;
 	}
 
-	img {
-		border-radius: 20%;
-		width: 60%;
-		height: 60%;
-		box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Add some shadow */
-		transition: transform 0.3s; /* Smooth transition */
+	.hero-text p {
+		margin-top: 0.9rem;
+		margin-bottom: 0.4rem;
+		font-size: 1.1rem;
+		line-height: 1.7;
+		color: #4b5563;
 	}
 
-	img:hover {
-		transform: scale(1.02); /* Slightly enlarge image on hover */
+	.hero-kicker {
+		font-size: 1.2rem;
+		font-weight: 600;
+		color: var(--accent-dark);
 	}
 
-	ul {
-		display: flex;
-		justify-content: space-around;
+	.hero-note {
+		margin-top: 1.2rem;
+		font-weight: 500;
+		color: #9f1239;
 	}
 
-	p {
-		align-self: flex-start;
-		margin-top: 1rem;
-		margin-bottom: .1rem;
-		font-size: 1.5rem;
-		color: var(--accent-dark); /* Use your accent color for text */
-		line-height: 1.6; /* Improve readability */
-		background: var(--accent-light); /* Light background for contrast */
-		padding: 1rem 1.5rem; /* Add some padding */
+	.hero-media img {
+		width: 100%;
+		max-height: 360px;
+		object-fit: cover;
+		border-radius: 24px;
+		box-shadow: 0 16px 40px rgba(15, 23, 42, 0.28);
+		transition: transform 0.25s ease, box-shadow 0.25s ease;
 	}
 
-	@media (max-width: 1300px) {
-		ul {
-			flex-direction: column;
-			align-items: center;
+	.hero-media img:hover {
+		transform: translateY(-4px) scale(1.02);
+		box-shadow: 0 24px 60px rgba(15, 23, 42, 0.32);
+	}
+
+	.moment {
+		margin-top: 3rem;
+	}
+
+	.moment-content {
+		display: grid;
+		grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+		gap: 2.25rem;
+		align-items: flex-start;
+	}
+
+	.moment-content--reverse .moment-text {
+		order: 2;
+	}
+
+	.moment-content--reverse .moment-media {
+		order: 1;
+	}
+
+	.moment-text p {
+		margin-top: 0.9rem;
+		margin-bottom: 0.4rem;
+		font-size: 1.1rem;
+		line-height: 1.7;
+		color: #374151;
+		background: rgba(250, 207, 222, 0.4);
+		padding: 0.85rem 1.25rem;
+		border-radius: 1.25rem;
+	}
+
+	.moment-text p.meta {
+		background: rgba(250, 207, 222, 0.7);
+		font-weight: 500;
+	}
+
+	.moment-media img {
+		width: 100%;
+		border-radius: 20px;
+		box-shadow: 0 12px 32px rgba(15, 23, 42, 0.2);
+		transition: transform 0.25s ease, box-shadow 0.25s ease;
+	}
+
+	.moment-media img:hover {
+		transform: translateY(-3px) scale(1.01);
+		box-shadow: 0 18px 45px rgba(15, 23, 42, 0.28);
+	}
+
+	.shops-grid {
+		list-style: none;
+		padding-left: 0;
+		margin-top: 1.5rem;
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+		gap: 1.25rem;
+	}
+
+	@media (max-width: 900px) {
+		.hero-grid,
+		.moment-content {
+			grid-template-columns: minmax(0, 1fr);
 		}
 
-		img {
-			width: 80%;
-			height: 80%;
+		.moment-content--reverse .moment-text,
+		.moment-content--reverse .moment-media {
+			order: initial;
+		}
+	}
+
+	@media (max-width: 640px) {
+		section {
+			margin: 2rem auto;
+			padding: 0 1.1rem;
+		}
+
+		.hero-media img,
+		.moment-media img {
+			max-height: none;
+		}
+
+		.moment-text p {
+			font-size: 1rem;
 		}
 	}
 	
