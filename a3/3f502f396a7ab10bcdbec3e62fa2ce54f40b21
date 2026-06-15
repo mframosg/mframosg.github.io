@@ -1,0 +1,23 @@
+src/components/SideBar.astro
+  s_672f1ae76d4942::t_9cd9c1bf61f759 218-229
+  s_672f1ae76d4942::t_ab6e4d550574f6 89-91
+src/pages/para-siempre.astro
+  s_672f1ae76d4942::t_d9416b0b235301 491-517
+  s_672f1ae76d4942::t_0ea6dc7264cc8f 138-198
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.7",
+  "base_commit_sha": "a33f502f396a7ab10bcdbec3e62fa2ce54f40b21",
+  "prompts": {},
+  "sessions": {
+    "s_672f1ae76d4942": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "97a712d2-f344-4c23-9abc-bdeb4d7ff4d5",
+        "model": "claude-sonnet-4-6"
+      },
+      "human_author": "mframosg <mframosg@eafit.edu.co>"
+    }
+  }
+}
