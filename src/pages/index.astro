@@ -623,3 +623,16 @@ import { MOMENTS } from '../data/moments';
     .cta-stack { width: 100%; max-width: 280px; }
   }
 </style>
+
+<script>
+  // 1. Deshabilitar restauración de scroll del browser — siempre empezar desde arriba
+  if ('scrollRestoration' in history) {
+    history.scrollRestoration = 'manual';
+  }
+
+  const container = document.getElementById('snap-container');
+  if (container) {
+    // Ir al inicio inmediatamente al cargar
+    container.scrollTo({ top: 0, behavior: 'instant' });
+  }
+</script>

@@ -304,8 +304,10 @@
   });
 
   // Marca el link activo según la sección visible
+  // Usa #snap-container como root si existe (página de inicio)
   const sections = ['momento1', 'momento2', 'momento3', 'momento4'];
   const links = document.querySelectorAll('aside a[href^="#"]');
+  const snapContainer = document.getElementById('snap-container');
 
   const observer = new IntersectionObserver(
     (entries) => {
@@ -317,7 +319,10 @@
         }
       });
     },
-    { threshold: 0.45 }
+    {
+      root: snapContainer ?? null,
+      threshold: 0.5,
+    }
   );
 
   sections.forEach((id) => {
