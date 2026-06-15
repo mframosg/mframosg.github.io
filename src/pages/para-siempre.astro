@@ -135,6 +135,67 @@
       text-align: center;
     }
 
+    /* ── TIMELINE ──────────────────────────────────── */
+    .timeline-section {
+      margin: 2rem 0 0;
+    }
+
+    .timeline {
+      display: flex;
+      flex-direction: column;
+      gap: 0.9rem;
+      align-items: center;
+    }
+
+    .timeline-item {
+      display: flex;
+      align-items: center;
+      gap: 0.9rem;
+      width: 100%;
+      max-width: 280px;
+    }
+
+    .tl-num {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 0.75rem;
+      font-style: italic;
+      color: var(--ink-soft);
+      opacity: 0.4;
+      min-width: 1.6rem;
+      text-align: right;
+    }
+
+    .tl-line {
+      width: 1.8rem;
+      height: 1px;
+      background: rgba(180,180,180,0.35);
+      flex-shrink: 0;
+    }
+
+    .tl-text {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 300;
+      font-size: 0.82rem;
+      color: var(--ink-soft);
+      opacity: 0.55;
+      letter-spacing: 0.03em;
+    }
+
+    .timeline-item--now .tl-num {
+      color: var(--gold);
+      opacity: 0.9;
+    }
+
+    .timeline-item--now .tl-line {
+      background: linear-gradient(to right, rgba(201,169,110,0.4), transparent);
+    }
+
+    .timeline-item--now .tl-text {
+      color: var(--gold);
+      opacity: 1;
+      font-weight: 400;
+    }
+
     /* ── POEM / LETTER ─────────────────────────────── */
     .poem {
       font-family: 'Poppins', sans-serif;
@@ -426,6 +487,33 @@
       </div>
       <p class="hero-sub">una carta para mi persona favorita.</p>
     </header>
+
+    <!-- TIMELINE -->
+    <section class="section timeline-section reveal">
+      <div class="timeline">
+        <div class="timeline-item timeline-item--past">
+          <span class="tl-num">23</span>
+          <span class="tl-line"></span>
+          <span class="tl-text">un día especial</span>
+        </div>
+        <div class="timeline-item timeline-item--past">
+          <span class="tl-num">24</span>
+          <span class="tl-line"></span>
+          <span class="tl-text">un Apple Watch</span>
+        </div>
+        <div class="timeline-item timeline-item--now">
+          <span class="tl-num">25</span>
+          <span class="tl-line"></span>
+          <span class="tl-text">esto ✦</span>
+        </div>
+      </div>
+    </section>
+
+    <div class="divider reveal">
+      <span class="divider-line"></span>
+      <span class="divider-icon">✦</span>
+      <span class="divider-line"></span>
+    </div>
 
     <!-- POEM -->
     <section class="section reveal">
