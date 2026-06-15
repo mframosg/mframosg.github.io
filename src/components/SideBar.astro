@@ -268,27 +268,26 @@
 
 <script>
   // Navegación sidebar — Safari + scroll-snap fix
-  // scroll-snap en Safari ignora scrollIntoView y devuelve al inicio.
-  // Solución: desactivar snap, saltar instantáneamente, reactivar.
+  // Scrolleamos el #snap-container en lugar de window.
+  // Esto es mucho más estable en Safari iOS con scroll-snap.
   function scrollToId(id: string) {
     const target = document.getElementById(id);
+    const container = document.getElementById('snap-container');
+
     if (!target) return;
 
-    const html = document.documentElement;
-
-    // 1. Desactivar scroll-snap temporalmente
-    html.style.scrollSnapType = 'none';
-
-    // 2. Saltar a la posición del elemento
-    const top = target.getBoundingClientRect().top + window.scrollY;
-    window.scrollTo({ top, behavior: 'instant' });
-
-    // 3. Reactivar scroll-snap después de que el scroll termina
-    requestAnimationFrame(() => {
-      requestAnimationFrame(() => {
-        html.style.scrollSnapType = '';
+    // Si existe el contenedor snap, scrolleamos dentro de él
+    if (container) {
+      const containerTop = container.getBoundingClientRect().top;
+      const targetTop = target.getBoundingClientRect().top;
+      container.scrollTo({
+        top: container.scrollTop + (targetTop - containerTop),
+        behavior: 'smooth',
       });
-    });
+    } else {
+      // Fallback para otras páginas (secret, para-siempre)
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
   }
 
   document.querySelectorAll('aside a[href^="#"]').forEach(link => {
