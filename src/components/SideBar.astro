@@ -267,13 +267,28 @@
 </style>
 
 <script>
-  // Navegación con JS — necesario en Safari con scroll-snap activo
-  // (el anchor nativo es ignorado por Safari en este contexto)
+  // Navegación sidebar — Safari + scroll-snap fix
+  // scroll-snap en Safari ignora scrollIntoView y devuelve al inicio.
+  // Solución: desactivar snap, saltar instantáneamente, reactivar.
   function scrollToId(id: string) {
     const target = document.getElementById(id);
     if (!target) return;
-    // scrollIntoView es más confiable que anchor nativo en Safari con scroll-snap
-    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+    const html = document.documentElement;
+
+    // 1. Desactivar scroll-snap temporalmente
+    html.style.scrollSnapType = 'none';
+
+    // 2. Saltar a la posición del elemento
+    const top = target.getBoundingClientRect().top + window.scrollY;
+    window.scrollTo({ top, behavior: 'instant' });
+
+    // 3. Reactivar scroll-snap después de que el scroll termina
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        html.style.scrollSnapType = '';
+      });
+    });
   }
 
   document.querySelectorAll('aside a[href^="#"]').forEach(link => {
@@ -281,11 +296,6 @@
       e.preventDefault();
       scrollToId((link as HTMLAnchorElement).getAttribute('href')!.slice(1));
     });
-    // Soporte para touch en Safari — usar touchend para evitar el delay de 300ms
-    link.addEventListener('touchend', (e) => {
-      e.preventDefault();
-      scrollToId((link as HTMLAnchorElement).getAttribute('href')!.slice(1));
-    }, { passive: false });
   });
 
   // Marca el link activo según la sección visible
