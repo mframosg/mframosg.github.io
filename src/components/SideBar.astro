@@ -257,7 +257,13 @@
     }
 
     a::before { display: none; }
-    .year-label { display: none; }
+
+    .year-label {
+      display: block;
+      font-size: 0.5rem;
+      writing-mode: horizontal-tb;
+      opacity: 0.45;
+    }
 
     a svg {
       width: 1rem;
