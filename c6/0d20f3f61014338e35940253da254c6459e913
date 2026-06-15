@@ -1,0 +1,20 @@
+src/pages/index.astro
+  s_672f1ae76d4942::t_17ba0b59d8cbd0 602-609
+  s_672f1ae76d4942::t_5953bd3ac2de85 305-314
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.7",
+  "base_commit_sha": "c60d20f3f61014338e35940253da254c6459e913",
+  "prompts": {},
+  "sessions": {
+    "s_672f1ae76d4942": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "97a712d2-f344-4c23-9abc-bdeb4d7ff4d5",
+        "model": "claude-sonnet-4-6"
+      },
+      "human_author": "mframosg <mframosg@eafit.edu.co>"
+    }
+  }
+}
