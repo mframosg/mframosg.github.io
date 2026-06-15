@@ -1,0 +1,14 @@
+src/pages/para-siempre.astro
+  h_1ec41f70e49007 92
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.7",
+  "base_commit_sha": "75edcee0c610342d7bbb69592dbf761d762533a6",
+  "prompts": {},
+  "humans": {
+    "h_1ec41f70e49007": {
+      "author": "mframosg <mframosg@eafit.edu.co>"
+    }
+  }
+}
