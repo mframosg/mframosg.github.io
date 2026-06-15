@@ -1,0 +1,55 @@
+---
+/**
+ * SectionHeader — renders the eyebrow number + section title used in each moment slide.
+ *
+ * Props:
+ *   num   — step number string, e.g. "01", "02"
+ *   title — section title text
+ */
+interface Props {
+  num: string;
+  title: string;
+}
+
+const { num, title } = Astro.props;
+---
+
+<div class="section-eyebrow">
+  <span class="section-num">{num}</span>
+  <span class="section-line"></span>
+</div>
+<h2 class="section-title">{title}</h2>
+
+<style>
+  .section-eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    margin-bottom: 1rem;
+  }
+
+  .section-num {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 0.72rem;
+    font-style: italic;
+    color: var(--rose-deep);
+    opacity: 0.5;
+  }
+
+  .section-line {
+    width: 2rem;
+    height: 1px;
+    background: var(--rose-deep);
+    opacity: 0.25;
+  }
+
+  .section-title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+    font-weight: 600;
+    font-style: italic;
+    color: var(--rose-deep);
+    line-height: 1.2;
+    margin-bottom: 1.2rem;
+  }
+</style>

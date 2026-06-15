@@ -1,479 +1,16 @@
 ---
-// /para-siempre — carta de amor. Página autónoma (sin Layout.astro).
+/**
+ * para-siempre.astro — Love letter page.
+ * Uses Layout with fullPage=true so it gets shared fonts/variables
+ * but manages its own full-viewport layout (no white card container).
+ *
+ * To edit: update the text content below in the HTML section.
+ * Fonts and CSS variables come from Layout.astro — no need to redefine them here.
+ */
+import Layout from '../layouts/Layout.astro';
 ---
 
-<!doctype html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Para Siempre</title>
-  <meta name="robots" content="noindex, nofollow" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Poppins:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap" rel="stylesheet" />
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    :root {
-      --rose:      #e8a0b4;
-      --rose-pale: #f7dde7;
-      --rose-deep: #c0637d;
-      --gold:      #c9a96e;
-      --ink:       #2d2d2d;
-      --ink-soft:  #6b6b6b;
-      --cream:     #fff8f9;
-    }
-
-    html { scroll-behavior: smooth; }
-
-    body {
-      font-family: 'Poppins', sans-serif;
-      background: var(--cream);
-      color: var(--ink);
-      min-height: 100vh;
-      /* subtle radial gradient for depth */
-      background-image:
-        radial-gradient(ellipse 80% 50% at 50% -10%, rgba(232,160,180,0.18) 0%, transparent 70%),
-        radial-gradient(ellipse 60% 40% at 80% 100%, rgba(201,169,110,0.10) 0%, transparent 60%);
-    }
-
-    /* ── Scroll-reveal utility ─────────────────────── */
-    .reveal {
-      opacity: 0;
-      transform: translateY(28px);
-      transition: opacity 0.75s ease, transform 0.75s ease;
-    }
-    .reveal.visible {
-      opacity: 1;
-      transform: none;
-    }
-
-    /* ── Page wrapper ──────────────────────────────── */
-    .page {
-      max-width: 680px;
-      margin: 0 auto;
-      padding: 4rem 2rem 6rem;
-    }
-
-    /* ── HERO ──────────────────────────────────────── */
-    .hero {
-      text-align: center;
-      padding: 3rem 0 2.5rem;
-    }
-
-    .hero-eyebrow {
-      font-family: 'Poppins', sans-serif;
-      font-weight: 300;
-      font-size: 0.78rem;
-      letter-spacing: 0.35em;
-      text-transform: uppercase;
-      color: var(--rose-deep);
-      margin-bottom: 1.4rem;
-    }
-
-    .hero-title {
-      font-family: 'Playfair Display', Georgia, serif;
-      font-size: clamp(2.8rem, 8vw, 4.5rem);
-      font-weight: 600;
-      line-height: 1.1;
-      color: var(--ink);
-      letter-spacing: -0.01em;
-    }
-
-    .hero-title em {
-      font-style: italic;
-      color: var(--rose-deep);
-    }
-
-    .ornament {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 1rem;
-      margin: 1.8rem 0;
-    }
-
-    .ornament-line {
-      width: 80px;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, var(--gold));
-    }
-
-    .ornament-line:last-child {
-      background: linear-gradient(90deg, var(--gold), transparent);
-    }
-
-    .ornament-diamond {
-      color: var(--gold);
-      font-size: 0.9rem;
-      letter-spacing: 0.3em;
-    }
-
-    .hero-sub {
-      font-family: 'Poppins', sans-serif;
-      font-weight: 300;
-      font-style: italic;
-      font-size: 1.05rem;
-      color: var(--ink-soft);
-      line-height: 1.6;
-    }
-
-    /* ── SECTION WRAPPER ───────────────────────────── */
-    .section {
-      margin: 4rem 0;
-    }
-
-    .section-label {
-      font-family: 'Poppins', sans-serif;
-      font-weight: 300;
-      font-size: 0.72rem;
-      letter-spacing: 0.3em;
-      text-transform: uppercase;
-      color: var(--rose);
-      margin-bottom: 1.5rem;
-      text-align: center;
-    }
-
-    /* ── TIMELINE ──────────────────────────────────── */
-    .timeline-section {
-      margin: 2rem 0 0;
-    }
-
-    .timeline {
-      display: flex;
-      flex-direction: column;
-      gap: 0.9rem;
-      align-items: center;
-    }
-
-    .timeline-item {
-      display: flex;
-      align-items: center;
-      gap: 0.9rem;
-      width: 100%;
-      max-width: 280px;
-    }
-
-    .tl-num {
-      font-family: 'Playfair Display', Georgia, serif;
-      font-size: 0.75rem;
-      font-style: italic;
-      color: var(--ink-soft);
-      opacity: 0.4;
-      min-width: 1.6rem;
-      text-align: right;
-    }
-
-    .tl-line {
-      width: 1.8rem;
-      height: 1px;
-      background: rgba(180,180,180,0.35);
-      flex-shrink: 0;
-    }
-
-    .tl-text {
-      font-family: 'Poppins', sans-serif;
-      font-weight: 300;
-      font-size: 0.82rem;
-      color: var(--ink-soft);
-      opacity: 0.55;
-      letter-spacing: 0.03em;
-    }
-
-    .timeline-item--now .tl-num {
-      color: var(--gold);
-      opacity: 0.9;
-    }
-
-    .timeline-item--now .tl-line {
-      background: linear-gradient(to right, rgba(201,169,110,0.4), transparent);
-    }
-
-    .timeline-item--now .tl-text {
-      color: var(--gold);
-      opacity: 1;
-      font-weight: 400;
-    }
-
-    /* ── POEM / LETTER ─────────────────────────────── */
-    .poem {
-      font-family: 'Poppins', sans-serif;
-      font-weight: 300;
-      font-size: 1.05rem;
-      line-height: 2;
-      color: var(--ink);
-      text-align: center;
-    }
-
-    .poem p {
-      margin-bottom: 1.6rem;
-    }
-
-    .poem p:last-child {
-      margin-bottom: 0;
-    }
-
-    /* ── PHOTO FRAME ───────────────────────────────── */
-    .photo-frame {
-      position: relative;
-      display: flex;
-      justify-content: center;
-    }
-
-    .photo-frame::before {
-      content: '';
-      position: absolute;
-      inset: -8px;
-      border: 1px solid var(--gold);
-      border-radius: 20px;
-      opacity: 0.45;
-      pointer-events: none;
-    }
-
-    .photo-frame img {
-      width: 100%;
-      max-height: 440px;
-      object-fit: cover;
-      border-radius: 14px;
-      box-shadow: 0 12px 40px rgba(45, 45, 45, 0.12), 0 2px 8px rgba(201,169,110,0.15);
-      display: block;
-    }
-
-    /* horizontal: centrar en caras */
-    .photo-landscape {
-      object-position: center 35%;
-    }
-
-    /* vertical portrait recortada cuadrada: mostrar la parte superior */
-    .photo-portrait {
-      object-position: center 15%;
-    }
-
-    .photo-caption {
-      text-align: center;
-      font-size: 0.8rem;
-      font-weight: 300;
-      font-style: italic;
-      color: var(--ink-soft);
-      margin-top: 1rem;
-      letter-spacing: 0.04em;
-    }
-
-    /* photo 2 — cuadrada, centrada */
-    .photo-frame--small {
-      max-width: 420px;
-      margin: 0 auto;
-    }
-
-    .photo-frame--small img {
-      max-height: 420px;
-      aspect-ratio: 1 / 1;
-    }
-
-    /* ── REASONS LIST ──────────────────────────────── */
-    .reasons-title {
-      font-family: 'Playfair Display', Georgia, serif;
-      font-size: 1.55rem;
-      font-weight: 400;
-      font-style: italic;
-      color: var(--ink);
-      text-align: center;
-      margin-bottom: 2.2rem;
-    }
-
-    .reasons-list {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 1.1rem;
-    }
-
-    .reasons-list li {
-      display: grid;
-      grid-template-columns: 2.2rem 1fr;
-      align-items: baseline;
-      gap: 0.9rem;
-      padding: 0.9rem 1.2rem;
-      border-radius: 12px;
-      background: rgba(232,160,180,0.07);
-      border: 1px solid rgba(232,160,180,0.18);
-      transition: background 0.25s ease, border-color 0.25s ease;
-    }
-
-    .reasons-list li:hover {
-      background: rgba(232,160,180,0.14);
-      border-color: rgba(232,160,180,0.35);
-    }
-
-    .reason-num {
-      font-family: 'Playfair Display', Georgia, serif;
-      font-size: 1.1rem;
-      font-style: italic;
-      color: var(--rose-deep);
-      opacity: 0.85;
-      text-align: right;
-    }
-
-    .reason-text {
-      font-family: 'Poppins', sans-serif;
-      font-weight: 300;
-      font-size: 0.97rem;
-      line-height: 1.6;
-      color: var(--ink);
-    }
-
-    /* ── CLOSING ───────────────────────────────────── */
-    .closing {
-      text-align: center;
-      padding: 2rem 0 1rem;
-    }
-
-    .closing-quote {
-      font-family: 'Playfair Display', Georgia, serif;
-      font-size: 1.25rem;
-      font-style: italic;
-      font-weight: 400;
-      color: var(--ink);
-      line-height: 1.65;
-      margin-bottom: 1rem;
-    }
-
-    .closing-sig {
-      font-family: 'Poppins', sans-serif;
-      font-weight: 300;
-      font-size: 0.9rem;
-      color: var(--ink-soft);
-      letter-spacing: 0.08em;
-    }
-
-    /* ── BACK BUTTON ───────────────────────────────── */
-    .back-wrap {
-      display: flex;
-      justify-content: center;
-      margin-top: 3.5rem;
-    }
-
-    .back-link {
-      font-family: 'Poppins', sans-serif;
-      font-weight: 400;
-      font-size: 0.85rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--ink-soft);
-      text-decoration: none;
-      border-bottom: 1px solid var(--rose);
-      padding-bottom: 2px;
-      transition: color 0.2s ease, border-color 0.2s ease;
-    }
-
-    .back-link:hover {
-      color: var(--rose-deep);
-      border-color: var(--rose-deep);
-    }
-
-    /* ── Divider ───────────────────────────────────── */
-    .divider {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      margin: 3.5rem 0;
-    }
-
-    .divider-line {
-      flex: 1;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(201,169,110,0.35), transparent);
-    }
-
-    .divider-icon {
-      font-size: 0.75rem;
-      color: var(--gold);
-      opacity: 0.7;
-    }
-
-    /* ── Polaroid ──────────────────────────────────── */
-    .polaroid-wrap {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 1.6rem;
-    }
-
-    .polaroid {
-      background: #fff;
-      padding: 0.9rem 0.9rem 2.8rem;
-      box-shadow:
-        0 6px 20px rgba(45,45,45,0.12),
-        0 1px 4px rgba(45,45,45,0.08);
-      transform: rotate(-1.5deg);
-      max-width: 280px;
-      transition: transform 0.3s ease;
-    }
-
-    .polaroid:hover {
-      transform: rotate(0deg) scale(1.02);
-    }
-
-    .polaroid img {
-      width: 100%;
-      display: block;
-      object-fit: cover;
-      aspect-ratio: 3 / 4;
-      object-position: center 20%;
-      filter: sepia(0.12) contrast(0.95);
-    }
-
-    .polaroid-caption {
-      text-align: center;
-      font-family: 'Poppins', sans-serif;
-      font-weight: 300;
-      font-size: 0.95rem;
-      line-height: 1.8;
-      color: var(--ink-soft);
-      max-width: 360px;
-    }
-
-    .polaroid-caption em {
-      color: var(--rose-deep);
-      font-style: italic;
-    }
-
-    /* ── Golden illustration ───────────────────────── */
-    .golden-wrap {
-      display: flex;
-      justify-content: center;
-      margin: 1rem 0 0;
-    }
-
-    .golden-illo {
-      width: 180px;
-      height: 180px;
-      object-fit: contain;
-      filter: drop-shadow(0 8px 20px rgba(240,98,146,0.18));
-    }
-
-    /* ── Responsive: iPhone 15 Pro Max ─────────────── */
-    @media (max-width: 480px) {
-      .page { padding: 3rem 1.4rem 7rem; }
-
-      .hero-title { font-size: clamp(2.2rem, 11vw, 3rem); }
-      .hero-sub   { font-size: 0.95rem; }
-
-      .poem { font-size: 0.97rem; line-height: 1.9; }
-
-      .reasons-list li { grid-template-columns: 1.8rem 1fr; gap: 0.6rem; padding: 0.8rem 1rem; }
-      .reason-text { font-size: 0.9rem; }
-      .reasons-title { font-size: 1.3rem; }
-
-      .photo-frame img { max-height: 300px; }
-
-      .closing-quote { font-size: 1.05rem; }
-      .golden-illo { width: 140px; height: 140px; }
-    }
-  </style>
-</head>
-<body>
+<Layout title="Para Siempre" description="Una carta especial" fullPage={true}>
   <main class="page">
 
     <!-- HERO -->
@@ -488,7 +25,7 @@
       <p class="hero-sub">una carta para mi persona favorita.</p>
     </header>
 
-    <!-- POEM -->
+    <!-- POEM / CARTA -->
     <section class="section reveal">
       <p class="section-label">carta</p>
       <div class="poem">
@@ -622,22 +159,402 @@
     </div>
 
   </main>
+</Layout>
 
-  <script>
-    // Intersection Observer para las animaciones reveal
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-            observer.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.12 }
-    );
+<style>
+  /* ── Para-siempre page uses its own color palette (softer tones) ── */
+  :root {
+    --rose:      #e8a0b4;
+    --rose-pale: #f7dde7;
+    --rose-deep: #c0637d;
+    --gold:      #c9a96e;
+    --ink:       #2d2d2d;
+    --ink-soft:  #6b6b6b;
+    --cream:     #fff8f9;
+  }
 
-    document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
-  </script>
-</body>
-</html>
+  /* ── Override body background for this page ── */
+  body {
+    background: var(--cream);
+    background-image:
+      radial-gradient(ellipse 80% 50% at 50% -10%, rgba(232,160,180,0.18) 0%, transparent 70%),
+      radial-gradient(ellipse 60% 40% at 80% 100%, rgba(201,169,110,0.10) 0%, transparent 60%);
+  }
+
+  /* ── Scroll-reveal utility ── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.75s ease, transform 0.75s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* ── Page wrapper ── */
+  .page {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 4rem 2rem 6rem;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    text-align: center;
+    padding: 3rem 0 2.5rem;
+  }
+
+  .hero-eyebrow {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 300;
+    font-size: 0.78rem;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--rose-deep);
+    margin-bottom: 1.4rem;
+  }
+
+  .hero-title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(2.8rem, 8vw, 4.5rem);
+    font-weight: 600;
+    line-height: 1.1;
+    color: var(--ink);
+    letter-spacing: -0.01em;
+  }
+
+  .hero-title em {
+    font-style: italic;
+    color: var(--rose-deep);
+  }
+
+  .ornament {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    margin: 1.8rem 0;
+  }
+
+  .ornament-line {
+    width: 80px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold));
+  }
+
+  .ornament-line:last-child {
+    background: linear-gradient(90deg, var(--gold), transparent);
+  }
+
+  .ornament-diamond {
+    color: var(--gold);
+    font-size: 0.9rem;
+    letter-spacing: 0.3em;
+  }
+
+  .hero-sub {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 300;
+    font-style: italic;
+    font-size: 1.05rem;
+    color: var(--ink-soft);
+    line-height: 1.6;
+  }
+
+  /* ── SECTION WRAPPER ── */
+  .section {
+    margin: 4rem 0;
+  }
+
+  .section-label {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 300;
+    font-size: 0.72rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--rose);
+    margin-bottom: 1.5rem;
+    text-align: center;
+  }
+
+  /* ── POEM / LETTER ── */
+  .poem {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 300;
+    font-size: 1.05rem;
+    line-height: 2;
+    color: var(--ink);
+    text-align: center;
+  }
+
+  .poem p {
+    margin-bottom: 1.6rem;
+  }
+
+  .poem p:last-child {
+    margin-bottom: 0;
+  }
+
+  /* ── PHOTO FRAME ── */
+  .photo-frame {
+    position: relative;
+    display: flex;
+    justify-content: center;
+  }
+
+  .photo-frame::before {
+    content: '';
+    position: absolute;
+    inset: -8px;
+    border: 1px solid var(--gold);
+    border-radius: 20px;
+    opacity: 0.45;
+    pointer-events: none;
+  }
+
+  .photo-frame img {
+    width: 100%;
+    max-height: 440px;
+    object-fit: cover;
+    border-radius: 14px;
+    box-shadow: 0 12px 40px rgba(45, 45, 45, 0.12), 0 2px 8px rgba(201,169,110,0.15);
+    display: block;
+  }
+
+  .photo-landscape {
+    object-position: center 35%;
+  }
+
+  .photo-portrait {
+    object-position: center 15%;
+  }
+
+  .photo-caption {
+    text-align: center;
+    font-size: 0.8rem;
+    font-weight: 300;
+    font-style: italic;
+    color: var(--ink-soft);
+    margin-top: 1rem;
+    letter-spacing: 0.04em;
+  }
+
+  /* ── REASONS LIST ── */
+  .reasons-title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 1.55rem;
+    font-weight: 400;
+    font-style: italic;
+    color: var(--ink);
+    text-align: center;
+    margin-bottom: 2.2rem;
+  }
+
+  .reasons-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 1.1rem;
+  }
+
+  .reasons-list li {
+    display: grid;
+    grid-template-columns: 2.2rem 1fr;
+    align-items: baseline;
+    gap: 0.9rem;
+    padding: 0.9rem 1.2rem;
+    border-radius: 12px;
+    background: rgba(232,160,180,0.07);
+    border: 1px solid rgba(232,160,180,0.18);
+    transition: background 0.25s ease, border-color 0.25s ease;
+  }
+
+  .reasons-list li:hover {
+    background: rgba(232,160,180,0.14);
+    border-color: rgba(232,160,180,0.35);
+  }
+
+  .reason-num {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 1.1rem;
+    font-style: italic;
+    color: var(--rose-deep);
+    opacity: 0.85;
+    text-align: right;
+  }
+
+  .reason-text {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 300;
+    font-size: 0.97rem;
+    line-height: 1.6;
+    color: var(--ink);
+  }
+
+  /* ── CLOSING ── */
+  .closing {
+    text-align: center;
+    padding: 2rem 0 1rem;
+  }
+
+  .closing-quote {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 1.25rem;
+    font-style: italic;
+    font-weight: 400;
+    color: var(--ink);
+    line-height: 1.65;
+    margin-bottom: 1rem;
+  }
+
+  .closing-sig {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 300;
+    font-size: 0.9rem;
+    color: var(--ink-soft);
+    letter-spacing: 0.08em;
+  }
+
+  /* ── BACK BUTTON ── */
+  .back-wrap {
+    display: flex;
+    justify-content: center;
+    margin-top: 3.5rem;
+  }
+
+  .back-link {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400;
+    font-size: 0.85rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    text-decoration: none;
+    border-bottom: 1px solid var(--rose);
+    padding-bottom: 2px;
+    transition: color 0.2s ease, border-color 0.2s ease;
+  }
+
+  .back-link:hover {
+    color: var(--rose-deep);
+    border-color: var(--rose-deep);
+  }
+
+  /* ── Divider ── */
+  .divider {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin: 3.5rem 0;
+  }
+
+  .divider-line {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(201,169,110,0.35), transparent);
+  }
+
+  .divider-icon {
+    font-size: 0.75rem;
+    color: var(--gold);
+    opacity: 0.7;
+  }
+
+  /* ── Polaroid ── */
+  .polaroid-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.6rem;
+  }
+
+  .polaroid {
+    background: #fff;
+    padding: 0.9rem 0.9rem 2.8rem;
+    box-shadow:
+      0 6px 20px rgba(45,45,45,0.12),
+      0 1px 4px rgba(45,45,45,0.08);
+    transform: rotate(-1.5deg);
+    max-width: 280px;
+    transition: transform 0.3s ease;
+  }
+
+  .polaroid:hover {
+    transform: rotate(0deg) scale(1.02);
+  }
+
+  .polaroid img {
+    width: 100%;
+    display: block;
+    object-fit: cover;
+    aspect-ratio: 3 / 4;
+    object-position: center 20%;
+    filter: sepia(0.12) contrast(0.95);
+  }
+
+  .polaroid-caption {
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 300;
+    font-size: 0.95rem;
+    line-height: 1.8;
+    color: var(--ink-soft);
+    max-width: 360px;
+  }
+
+  .polaroid-caption em {
+    color: var(--rose-deep);
+    font-style: italic;
+  }
+
+  /* ── Golden illustration ── */
+  .golden-wrap {
+    display: flex;
+    justify-content: center;
+    margin: 1rem 0 0;
+  }
+
+  .golden-illo {
+    width: 180px;
+    height: 180px;
+    object-fit: contain;
+    filter: drop-shadow(0 8px 20px rgba(240,98,146,0.18));
+  }
+
+  /* ── Responsive: iPhone 15 Pro Max ── */
+  @media (max-width: 480px) {
+    .page { padding: 3rem 1.4rem 7rem; }
+
+    .hero-title { font-size: clamp(2.2rem, 11vw, 3rem); }
+    .hero-sub   { font-size: 0.95rem; }
+
+    .poem { font-size: 0.97rem; line-height: 1.9; }
+
+    .reasons-list li { grid-template-columns: 1.8rem 1fr; gap: 0.6rem; padding: 0.8rem 1rem; }
+    .reason-text { font-size: 0.9rem; }
+    .reasons-title { font-size: 1.3rem; }
+
+    .photo-frame img { max-height: 300px; }
+
+    .closing-quote { font-size: 1.05rem; }
+    .golden-illo { width: 140px; height: 140px; }
+  }
+</style>
+
+<script>
+  // Intersection Observer para las animaciones reveal
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.12 }
+  );
+
+  document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+</script>

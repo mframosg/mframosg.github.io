@@ -62,6 +62,16 @@
       <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
     </svg>
   </a>
+
+  <span class="sep"></span>
+  <span class="year-label year-label--coming">26</span>
+
+  <a href="#momento-26" aria-label="Próximamente" data-tooltip="próximamente" class="link-coming">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+      <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+    </svg>
+  </a>
 </aside>
 
 <style>
@@ -84,8 +94,7 @@
     align-items: center;
     gap: 0.15rem;
     z-index: 20;
-    max-height: 95vh;
-    overflow: hidden;
+    max-height: 95svh;
   }
 
   /* ── icon buttons ── */
@@ -180,6 +189,11 @@
     opacity: 0.7;
   }
 
+  .year-label--coming {
+    color: #aaa;
+    opacity: 0.35;
+  }
+
   /* ── apple watch ── */
   a.link-watch {
     color: #a0a0c0;
@@ -189,6 +203,19 @@
     background: linear-gradient(135deg, #a0a0c0, #c0c0e0);
     color: #fff;
     box-shadow: 0 6px 18px rgba(160, 160, 192, 0.35);
+  }
+
+  /* ── coming soon ── */
+  a.link-coming {
+    color: #bbb;
+    opacity: 0.5;
+  }
+
+  a.link-coming:hover {
+    background: rgba(180,180,180,0.15);
+    color: #999;
+    box-shadow: none;
+    opacity: 0.7;
   }
 
   /* ── para siempre: siempre con un toque especial ── */
@@ -240,16 +267,25 @@
 </style>
 
 <script>
-  // Navegación con JS para compatibilidad con Safari + scroll-snap
+  // Navegación con JS — necesario en Safari con scroll-snap activo
+  // (el anchor nativo es ignorado por Safari en este contexto)
+  function scrollToId(id: string) {
+    const target = document.getElementById(id);
+    if (!target) return;
+    // scrollIntoView es más confiable que anchor nativo en Safari con scroll-snap
+    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
   document.querySelectorAll('aside a[href^="#"]').forEach(link => {
     link.addEventListener('click', (e) => {
       e.preventDefault();
-      const id = link.getAttribute('href').slice(1);
-      const target = document.getElementById(id);
-      if (!target) return;
-      // scrollIntoView es más confiable que anchor nativo en Safari con scroll-snap
-      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      scrollToId((link as HTMLAnchorElement).getAttribute('href')!.slice(1));
     });
+    // Soporte para touch en Safari — usar touchend para evitar el delay de 300ms
+    link.addEventListener('touchend', (e) => {
+      e.preventDefault();
+      scrollToId((link as HTMLAnchorElement).getAttribute('href')!.slice(1));
+    }, { passive: false });
   });
 
   // Marca el link activo según la sección visible

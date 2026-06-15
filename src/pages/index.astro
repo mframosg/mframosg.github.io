@@ -1,498 +1,28 @@
 ---
+/**
+ * index.astro — Birthday day-plan page.
+ *
+ * Layout: full-viewport scroll-snap slides.
+ * To edit content (moments, text, images) update src/data/moments.ts.
+ * To edit the hero slide, edit directly below the "HERO" comment.
+ * To edit shops, update the Card components in the "COMPRAS" section.
+ */
+import Layout from '../layouts/Layout.astro';
 import Card from '../components/Card.astro';
 import SideBar from '../components/SideBar.astro';
+import MetaCard from '../components/MetaCard.astro';
+import SectionHeader from '../components/SectionHeader.astro';
+import { MOMENTS } from '../data/moments';
 ---
 
-<!doctype html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Cumpleaños 23</title>
-  <link rel="icon" href="/huella.png" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400;1,600&family=Poppins:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet" />
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    :root {
-      --rose:      #f06292;
-      --rose-pale: #facfde;
-      --rose-deep: #a84466;
-      --gold:      #c9a96e;
-      --ink:       #1f1f1f;
-      --ink-soft:  #666;
-      --cream:     #fdf2f8;
-    }
-
-    html {
-      scroll-snap-type: y mandatory;
-      scroll-behavior: smooth;
-      overflow-y: scroll;
-      height: 100%;
-    }
-
-    body {
-      font-family: 'Poppins', sans-serif;
-      background: var(--cream);
-      color: var(--ink);
-      height: 100%;
-      background-image:
-        radial-gradient(ellipse 80% 60% at 20% 0%, rgba(250,207,222,0.7) 0%, transparent 60%),
-        radial-gradient(ellipse 60% 50% at 80% 100%, rgba(240,98,146,0.1) 0%, transparent 60%);
-    }
-
-    /* ── SNAP SECTIONS ── */
-    .slide {
-      height: 100vh;
-      scroll-snap-align: start;
-      scroll-snap-stop: always;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 2rem 5rem 2rem 7rem;
-      position: relative;
-      border-bottom: 1px solid rgba(240, 160, 180, 0.15);
-    }
-
-    .slide-inner {
-      width: 100%;
-      max-width: 1060px;
-      display: grid;
-      gap: 3rem;
-      align-items: center;
-    }
-
-    /* ── SLIDE 0: HERO ── */
-    #momento0 .slide-inner {
-      grid-template-columns: 1fr 400px;
-    }
-
-    .hero-eyebrow {
-      font-size: 0.72rem;
-      font-weight: 300;
-      letter-spacing: 0.35em;
-      text-transform: uppercase;
-      color: var(--rose-deep);
-      opacity: 0.65;
-      margin-bottom: 1.2rem;
-    }
-
-    .hero-title {
-      font-family: 'Playfair Display', Georgia, serif;
-      font-size: clamp(2.2rem, 5vw, 3.6rem);
-      font-weight: 600;
-      line-height: 1.12;
-      color: var(--ink);
-      margin-bottom: 1.4rem;
-    }
-
-    .hero-title em {
-      font-style: italic;
-      color: var(--rose-deep);
-    }
-
-    .hero-body {
-      font-weight: 300;
-      font-size: 1rem;
-      line-height: 1.8;
-      color: var(--ink-soft);
-      max-width: 400px;
-    }
-
-    .hero-img {
-      width: 100%;
-      height: 420px;
-      object-fit: cover;
-      object-position: center 30%;
-      border-radius: 20px;
-      box-shadow: 0 20px 50px rgba(15,23,42,0.18);
-    }
-
-    .hero-img--illustration {
-      object-fit: contain;
-      object-position: center;
-      box-shadow: none;
-      filter: drop-shadow(0 12px 30px rgba(240,98,146,0.18));
-    }
-
-    /* ── SLIDE 1, 3: text + image ── */
-    .slide--split .slide-inner {
-      grid-template-columns: 1fr 320px;
-    }
-
-    /* ── SLIDE 2: compras (full width text + cards below) ── */
-    .slide--shops .slide-inner {
-      grid-template-columns: 1fr;
-      gap: 1.8rem;
-    }
-
-    /* ── SLIDE 4: familia ── */
-    .slide--split-rev .slide-inner {
-      grid-template-columns: 320px 1fr;
-    }
-
-    /* ── Section label ── */
-    .section-eyebrow {
-      display: flex;
-      align-items: center;
-      gap: 0.8rem;
-      margin-bottom: 1rem;
-    }
-
-    .section-num {
-      font-family: 'Playfair Display', Georgia, serif;
-      font-size: 0.72rem;
-      font-style: italic;
-      color: var(--rose-deep);
-      opacity: 0.5;
-    }
-
-    .section-line {
-      width: 2rem;
-      height: 1px;
-      background: var(--rose-deep);
-      opacity: 0.25;
-    }
-
-    /* ── Section title ── */
-    .section-title {
-      font-family: 'Playfair Display', Georgia, serif;
-      font-size: clamp(1.6rem, 3.5vw, 2.4rem);
-      font-weight: 600;
-      font-style: italic;
-      color: var(--rose-deep);
-      line-height: 1.2;
-      margin-bottom: 1.2rem;
-    }
-
-    /* ── Body text ── */
-    .section-body {
-      font-weight: 300;
-      font-size: 0.97rem;
-      line-height: 1.8;
-      color: #555;
-      margin-bottom: 1rem;
-    }
-
-    .section-sub {
-      font-size: 0.82rem;
-      font-style: italic;
-      color: #aaa;
-      margin-bottom: 1.2rem;
-    }
-
-    /* ── Meta card ── */
-    .meta-card {
-      border: 1px solid rgba(240,160,180,0.3);
-      border-radius: 14px;
-      padding: 1rem 1.2rem;
-      background: rgba(255,245,248,0.7);
-      display: flex;
-      flex-direction: column;
-      gap: 0.55rem;
-      margin-top: 0.8rem;
-      backdrop-filter: blur(8px);
-    }
-
-    .meta-row {
-      display: flex;
-      gap: 1rem;
-      font-size: 0.87rem;
-      color: #444;
-      align-items: baseline;
-    }
-
-    .meta-label {
-      font-weight: 500;
-      color: var(--rose-deep);
-      min-width: 3.5rem;
-      font-size: 0.72rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      opacity: 0.75;
-    }
-
-    /* ── Section image ── */
-    .section-img {
-      width: 100%;
-      height: 320px;
-      object-fit: cover;
-      border-radius: 16px;
-      box-shadow: 0 12px 36px rgba(15,23,42,0.14);
-    }
-
-    /* ── Shops ── */
-    .shops-intro {
-      font-weight: 300;
-      font-size: 0.97rem;
-      line-height: 1.8;
-      color: #555;
-      max-width: 640px;
-    }
-
-    .shops-grid {
-      list-style: none;
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1rem;
-      max-width: 640px;
-    }
-
-    .shops-note {
-      font-size: 0.8rem;
-      font-style: italic;
-      color: #bbb;
-      margin-top: 0.4rem;
-    }
-
-    /* ── Slide Apple Watch ── */
-    .slide--watch {
-      background: radial-gradient(ellipse 70% 60% at 50% 50%, rgba(180,180,210,0.1) 0%, transparent 65%);
-    }
-
-    .slide-inner--watch {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-      gap: 1.4rem;
-      max-width: 420px;
-      margin: 0 auto;
-    }
-
-    .watch-year {
-      font-family: 'Playfair Display', Georgia, serif;
-      font-size: 0.72rem;
-      font-style: italic;
-      color: #a0a0c0;
-      opacity: 0.6;
-      letter-spacing: 0.2em;
-    }
-
-    .watch-ornament {
-      display: flex;
-      align-items: center;
-      gap: 0.8rem;
-    }
-
-    .watch-line {
-      width: 2.5rem;
-      height: 1px;
-      background: linear-gradient(to right, transparent, rgba(160,160,192,0.3));
-    }
-
-    .watch-line:last-child {
-      background: linear-gradient(to left, transparent, rgba(160,160,192,0.3));
-    }
-
-    .watch-dot {
-      font-size: 0.6rem;
-      color: #a0a0c0;
-      opacity: 0.5;
-    }
-
-    .watch-title {
-      font-family: 'Playfair Display', Georgia, serif;
-      font-size: clamp(1.8rem, 5vw, 2.8rem);
-      font-weight: 600;
-      font-style: italic;
-      color: var(--ink);
-      line-height: 1.2;
-    }
-
-    .watch-emoji {
-      font-size: 2.8rem;
-      line-height: 1;
-    }
-
-    .watch-body {
-      font-weight: 300;
-      font-size: 0.95rem;
-      line-height: 1.85;
-      color: var(--ink-soft);
-      max-width: 320px;
-    }
-
-    /* ── Slide transición de año ── */
-    .slide--year {
-      background:
-        radial-gradient(ellipse 80% 70% at 50% 50%, rgba(201,169,110,0.1) 0%, transparent 65%),
-        radial-gradient(ellipse 60% 50% at 20% 80%, rgba(250,207,222,0.25) 0%, transparent 55%);
-    }
-
-    .slide-inner--year {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-      gap: 1.6rem;
-      max-width: 500px;
-      margin: 0 auto;
-    }
-
-    .year-top {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-    }
-
-    .year-tag {
-      font-family: 'Poppins', sans-serif;
-      font-weight: 300;
-      font-size: 0.72rem;
-      letter-spacing: 0.3em;
-      padding: 0.3rem 0.9rem;
-      border-radius: 9999px;
-    }
-
-    .year-tag--old {
-      color: #aaa;
-      border: 1px solid rgba(180,180,180,0.3);
-      text-decoration: line-through;
-      opacity: 0.6;
-    }
-
-    .year-tag--new {
-      color: var(--gold);
-      border: 1px solid rgba(201,169,110,0.5);
-    }
-
-    .year-arrow {
-      color: #ccc;
-      font-size: 0.8rem;
-    }
-
-    .year-title {
-      font-family: 'Playfair Display', Georgia, serif;
-      font-size: clamp(2rem, 6vw, 3.2rem);
-      font-weight: 600;
-      line-height: 1.15;
-      color: var(--ink);
-    }
-
-    .year-title em {
-      font-style: italic;
-      color: var(--gold);
-    }
-
-    .year-body {
-      font-weight: 300;
-      font-size: 0.95rem;
-      line-height: 1.8;
-      color: var(--ink-soft);
-    }
-
-    .year-btn {
-      font-family: 'Poppins', sans-serif;
-      font-weight: 300;
-      font-size: 0.82rem;
-      letter-spacing: 0.22em;
-      text-decoration: none;
-      color: var(--gold);
-      border: 1px solid rgba(201,169,110,0.45);
-      padding: 0.75rem 2.4rem;
-      border-radius: 9999px;
-      margin-top: 0.5rem;
-      transition: background 0.25s, border-color 0.25s, box-shadow 0.25s;
-    }
-
-    .year-btn:hover {
-      background: rgba(201,169,110,0.1);
-      border-color: var(--gold);
-      box-shadow: 0 6px 20px rgba(201,169,110,0.22);
-    }
-
-    .year-btn-secondary {
-      font-family: 'Poppins', sans-serif;
-      font-weight: 300;
-      font-size: 0.72rem;
-      letter-spacing: 0.1em;
-      text-decoration: none;
-      color: #bbb;
-      border-bottom: 1px solid rgba(180,180,180,0.3);
-      padding-bottom: 1px;
-      transition: color 0.2s, border-color 0.2s;
-    }
-
-    .year-btn-secondary:hover {
-      color: #888;
-      border-color: #888;
-    }
-
-    /* ── Responsive: tablet ── */
-    @media (max-width: 900px) {
-      #momento0 .slide-inner,
-      .slide--split .slide-inner,
-      .slide--split-rev .slide-inner {
-        grid-template-columns: 1fr;
-      }
-
-      .slide {
-        padding: 2rem 2rem 2rem 2rem;
-        height: auto;
-        min-height: 100svh;
-        align-items: flex-start;
-        padding-top: 4rem;
-      }
-
-      .slide--split-rev .slide-inner img { order: -1; }
-
-      .hero-img { height: 260px; }
-      .section-img { height: 200px; }
-
-      .shops-grid { grid-template-columns: repeat(3, 1fr); max-width: 100%; }
-    }
-
-    /* ── Responsive: iPhone 15 Pro Max (430px) ── */
-    @media (max-width: 480px) {
-      html {
-        /* En iOS Safari 100vh no incluye la barra de dirección — usamos svh */
-        scroll-snap-type: y proximity;
-      }
-
-      .slide {
-        min-height: 100svh;
-        height: auto;
-        padding: 5rem 1.4rem 6rem;
-        align-items: flex-start;
-        justify-content: flex-start;
-      }
-
-      .slide-inner { gap: 1.6rem; }
-
-      .hero-title { font-size: 2rem; }
-      .hero-body  { font-size: 0.93rem; }
-      .hero-img   { height: 220px; border-radius: 14px; }
-
-      .section-title { font-size: 1.5rem; }
-      .section-body  { font-size: 0.93rem; }
-      .section-img   { height: 180px; border-radius: 12px; }
-
-      .shops-grid {
-        grid-template-columns: repeat(3, 1fr);
-        gap: 0.6rem;
-        max-width: 100%;
-      }
-
-      .meta-card { padding: 0.85rem 1rem; }
-      .meta-row  { font-size: 0.83rem; }
-
-      .slide--btns { min-height: 100svh; justify-content: center; }
-      .btns-eyebrow { font-size: 1rem; }
-      .cta-btn { font-size: 0.85rem; padding: 0.75rem 2rem; width: 100%; text-align: center; }
-      .cta-stack { width: 100%; max-width: 280px; }
-    }
-  </style>
-</head>
-<body>
-
+<Layout title="Para ti, mi Goldencito" fullPage={true}>
   <SideBar />
 
-  <!-- 00 · HERO -->
+  <!-- ─────────────────────────────────────────────────────────
+       00 · HERO
+       ───────────────────────────────────────────────────────── -->
   <section id="momento0" class="slide">
-    <div class="slide-inner">
+    <div class="slide-inner slide-inner--hero">
       <div>
         <p class="hero-eyebrow">16 de junio</p>
         <h1 class="hero-title">Feliz cumpleaños,<br /><em>mi Goldencito.</em></h1>
@@ -505,27 +35,28 @@ import SideBar from '../components/SideBar.astro';
     </div>
   </section>
 
-  <!-- 01 · DESAYUNO -->
-  <section id="momento1" class="slide slide--split">
-    <div class="slide-inner">
-      <div>
-        <div class="section-eyebrow">
-          <span class="section-num">01</span>
-          <span class="section-line"></span>
+  <!-- ─────────────────────────────────────────────────────────
+       01 · DESAYUNO  (rendered from moments.ts)
+       ───────────────────────────────────────────────────────── -->
+  {(() => {
+    const m = MOMENTS.find(m => m.id === 'momento1')!;
+    return (
+      <section id={m.id} class="slide slide--split">
+        <div class="slide-inner">
+          <div>
+            <SectionHeader num={m.num} title={m.title} />
+            <p class="section-body">{m.body}</p>
+            {m.meta && <MetaCard items={m.meta} />}
+          </div>
+          <img src={m.image} alt={m.imageAlt} class="section-img" />
         </div>
-        <h2 class="section-title">Desayuno</h2>
-        <p class="section-body">Para comenzar este día especial, te he preparado un desayuno sorpresa.</p>
-        <div class="meta-card">
-          <div class="meta-row"><span class="meta-label">Hora</span><span>8:00 a.m.</span></div>
-          <div class="meta-row"><span class="meta-label">Lugar</span><span>Mi casa</span></div>
-          <div class="meta-row"><span class="meta-label">Pista</span><span>Tú me has enseñado a prepararlo</span></div>
-        </div>
-      </div>
-      <img src="desayuno.png" alt="Desayuno" class="section-img" />
-    </div>
-  </section>
+      </section>
+    );
+  })()}
 
-  <!-- 02 · COMPRAS -->
+  <!-- ─────────────────────────────────────────────────────────
+       02 · COMPRAS — edit Card hrefs/imgSrc to change shops
+       ───────────────────────────────────────────────────────── -->
   <section id="momento2" class="slide slide--shops">
     <div class="slide-inner">
       <div>
@@ -549,43 +80,47 @@ import SideBar from '../components/SideBar.astro';
     </div>
   </section>
 
-  <!-- 03 · ALMUERZO -->
-  <section id="momento3" class="slide slide--split">
-    <div class="slide-inner">
-      <div>
-        <div class="section-eyebrow">
-          <span class="section-num">03</span>
-          <span class="section-line"></span>
+  <!-- ─────────────────────────────────────────────────────────
+       03 · ALMUERZO  (rendered from moments.ts)
+       ───────────────────────────────────────────────────────── -->
+  {(() => {
+    const m = MOMENTS.find(m => m.id === 'momento3')!;
+    return (
+      <section id={m.id} class="slide slide--split">
+        <div class="slide-inner">
+          <div>
+            <SectionHeader num={m.num} title={m.title} />
+            <p class="section-body">{m.body}</p>
+            {m.meta && <MetaCard items={m.meta} />}
+          </div>
+          <img src={m.image} alt={m.imageAlt} class="section-img" />
         </div>
-        <h2 class="section-title">Tiempo de almuerzo</h2>
-        <p class="section-body">Para continuar el día, vamos a almorzar. También es sorpresa.</p>
-        <div class="meta-card">
-          <div class="meta-row"><span class="meta-label">Hora</span><span>12:30 p.m.</span></div>
-          <div class="meta-row"><span class="meta-label">Lugar</span><span>Solo déjate llevar</span></div>
-          <div class="meta-row"><span class="meta-label">Pista</span><span>Lo comemos mucho, o tal vez sea la primera vez</span></div>
-        </div>
-      </div>
-      <img src="almuerzo.png" alt="Almuerzo" class="section-img" />
-    </div>
-  </section>
+      </section>
+    );
+  })()}
 
-  <!-- 04 · FAMILIA -->
-  <section id="momento4" class="slide slide--split-rev" style="scroll-margin-top:0">
-    <div class="slide-inner">
-      <img src="family.jpeg" alt="Familia" class="section-img" />
-      <div>
-        <div class="section-eyebrow">
-          <span class="section-num">04</span>
-          <span class="section-line"></span>
+  <!-- ─────────────────────────────────────────────────────────
+       04 · FAMILIA  (rendered from moments.ts)
+       ───────────────────────────────────────────────────────── -->
+  {(() => {
+    const m = MOMENTS.find(m => m.id === 'momento4')!;
+    return (
+      <section id={m.id} class="slide slide--split-rev" style="scroll-margin-top:0">
+        <div class="slide-inner">
+          <img src={m.image} alt={m.imageAlt} class="section-img" />
+          <div>
+            <SectionHeader num={m.num} title={m.title} />
+            <p class="section-body">{m.body}</p>
+            <a href="/secret" class="surprise-btn">sorpresa &thinsp;🎁</a>
+          </div>
         </div>
-        <h2 class="section-title">Compartir en familia</h2>
-        <p class="section-body">Terminaremos este día especial compartiendo tarde en familia.</p>
-        <a href="/secret" class="year-btn" style="margin-top:1.4rem;display:inline-block;font-size:0.78rem;padding:0.6rem 1.6rem;color:var(--rose-deep);border-color:rgba(240,98,146,0.35);">sorpresa &thinsp;🎁</a>
-      </div>
-    </div>
-  </section>
+      </section>
+    );
+  })()}
 
-  <!-- 04.5 · APPLE WATCH -->
+  <!-- ─────────────────────────────────────────────────────────
+       04.5 · APPLE WATCH
+       ───────────────────────────────────────────────────────── -->
   <section id="momento-watch" class="slide slide--watch">
     <div class="slide-inner slide-inner--watch">
       <div class="watch-year">24</div>
@@ -604,7 +139,10 @@ import SideBar from '../components/SideBar.astro';
     </div>
   </section>
 
-  <!-- 05 · TRANSICIÓN DE AÑO -->
+  <!-- ─────────────────────────────────────────────────────────
+       05 · TRANSICIÓN DE AÑO
+       Edit year tags and body text here each year.
+       ───────────────────────────────────────────────────────── -->
   <section class="slide slide--year">
     <div class="slide-inner slide-inner--year">
       <div class="year-top">
@@ -618,5 +156,463 @@ import SideBar from '../components/SideBar.astro';
     </div>
   </section>
 
-</body>
-</html>
+  <!-- ─────────────────────────────────────────────────────────
+       06 · COMING SOON — año 26
+       Cuando sea el momento, reemplaza este slide con el nuevo contenido.
+       ───────────────────────────────────────────────────────── -->
+  <section id="momento-26" class="slide slide--coming">
+    <div class="slide-inner slide-inner--year">
+      <span class="coming-num">26</span>
+      <div class="watch-ornament">
+        <span class="watch-line"></span>
+        <span class="watch-dot">◇</span>
+        <span class="watch-line"></span>
+      </div>
+      <h2 class="coming-title">Próximamente.</h2>
+      <p class="coming-body">El año que viene habrá algo nuevo aquí.</p>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  /* ── Page-level overrides for scroll-snap full-viewport layout ── */
+  html {
+    scroll-snap-type: y mandatory;
+    overflow-y: scroll;
+    height: 100%;
+  }
+
+  body {
+    height: 100%;
+    background-image:
+      radial-gradient(ellipse 80% 60% at 20% 0%, rgba(250,207,222,0.7) 0%, transparent 60%),
+      radial-gradient(ellipse 60% 50% at 80% 100%, rgba(240,98,146,0.1) 0%, transparent 60%);
+  }
+
+  /* ── SNAP SECTIONS ── */
+  .slide {
+    height: 100vh;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem 5rem 2rem 7rem;
+    position: relative;
+    border-bottom: 1px solid rgba(240, 160, 180, 0.15);
+  }
+
+  .slide-inner {
+    width: 100%;
+    max-width: 1060px;
+    display: grid;
+    gap: 3rem;
+    align-items: center;
+  }
+
+  /* ── SLIDE 0: HERO ── */
+  .slide-inner--hero {
+    grid-template-columns: 1fr 400px;
+  }
+
+  .hero-eyebrow {
+    font-size: 0.72rem;
+    font-weight: 300;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--rose-deep);
+    opacity: 0.65;
+    margin-bottom: 1.2rem;
+  }
+
+  .hero-title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(2.2rem, 5vw, 3.6rem);
+    font-weight: 600;
+    line-height: 1.12;
+    color: var(--ink);
+    margin-bottom: 1.4rem;
+  }
+
+  .hero-title em {
+    font-style: italic;
+    color: var(--rose-deep);
+  }
+
+  .hero-body {
+    font-weight: 300;
+    font-size: 1rem;
+    line-height: 1.8;
+    color: var(--ink-soft);
+    max-width: 400px;
+  }
+
+  .hero-img {
+    width: 100%;
+    height: 420px;
+    object-fit: cover;
+    object-position: center 30%;
+    border-radius: 20px;
+    box-shadow: 0 20px 50px rgba(15,23,42,0.18);
+  }
+
+  /* ── SLIDE 1, 3: text + image ── */
+  .slide--split .slide-inner {
+    grid-template-columns: 1fr 320px;
+  }
+
+  /* ── SLIDE 2: compras (full width text + cards below) ── */
+  .slide--shops .slide-inner {
+    grid-template-columns: 1fr;
+    gap: 1.8rem;
+  }
+
+  /* ── SLIDE 4: familia (image left) ── */
+  .slide--split-rev .slide-inner {
+    grid-template-columns: 320px 1fr;
+  }
+
+  /* ── Body text ── */
+  .section-body {
+    font-weight: 300;
+    font-size: 0.97rem;
+    line-height: 1.8;
+    color: #555;
+    margin-bottom: 1rem;
+  }
+
+  /* ── Eyebrow used directly in compras slide (not via SectionHeader) ── */
+  .section-eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    margin-bottom: 1rem;
+  }
+
+  .section-num {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 0.72rem;
+    font-style: italic;
+    color: var(--rose-deep);
+    opacity: 0.5;
+  }
+
+  .section-line {
+    width: 2rem;
+    height: 1px;
+    background: var(--rose-deep);
+    opacity: 0.25;
+  }
+
+  .section-title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+    font-weight: 600;
+    font-style: italic;
+    color: var(--rose-deep);
+    line-height: 1.2;
+    margin-bottom: 1.2rem;
+  }
+
+  /* ── Section image ── */
+  .section-img {
+    width: 100%;
+    height: 320px;
+    object-fit: cover;
+    border-radius: 16px;
+    box-shadow: 0 12px 36px rgba(15,23,42,0.14);
+  }
+
+  /* ── Shops ── */
+  .shops-intro {
+    font-weight: 300;
+    font-size: 0.97rem;
+    line-height: 1.8;
+    color: #555;
+    max-width: 640px;
+  }
+
+  .shops-grid {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    max-width: 640px;
+  }
+
+  .shops-note {
+    font-size: 0.8rem;
+    font-style: italic;
+    color: #bbb;
+    margin-top: 0.4rem;
+  }
+
+  /* ── Surprise button (familia slide) ── */
+  .surprise-btn {
+    display: inline-block;
+    margin-top: 1.4rem;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 300;
+    font-size: 0.78rem;
+    letter-spacing: 0.22em;
+    text-decoration: none;
+    color: var(--rose-deep);
+    border: 1px solid rgba(240, 98, 146, 0.35);
+    padding: 0.6rem 1.6rem;
+    border-radius: 9999px;
+    transition: background 0.25s, border-color 0.25s, box-shadow 0.25s;
+  }
+
+  .surprise-btn:hover {
+    background: rgba(240, 98, 146, 0.08);
+    border-color: var(--rose);
+    box-shadow: 0 6px 20px rgba(240, 98, 146, 0.18);
+  }
+
+  /* ── Slide Apple Watch ── */
+  .slide--watch {
+    background: radial-gradient(ellipse 70% 60% at 50% 50%, rgba(180,180,210,0.1) 0%, transparent 65%);
+  }
+
+  .slide-inner--watch {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 1.4rem;
+    max-width: 420px;
+    margin: 0 auto;
+  }
+
+  .watch-year {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 0.72rem;
+    font-style: italic;
+    color: #a0a0c0;
+    opacity: 0.6;
+    letter-spacing: 0.2em;
+  }
+
+  .watch-ornament {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+  }
+
+  .watch-line {
+    width: 2.5rem;
+    height: 1px;
+    background: linear-gradient(to right, transparent, rgba(160,160,192,0.3));
+  }
+
+  .watch-line:last-child {
+    background: linear-gradient(to left, transparent, rgba(160,160,192,0.3));
+  }
+
+  .watch-dot {
+    font-size: 0.6rem;
+    color: #a0a0c0;
+    opacity: 0.5;
+  }
+
+  .watch-title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(1.8rem, 5vw, 2.8rem);
+    font-weight: 600;
+    font-style: italic;
+    color: var(--ink);
+    line-height: 1.2;
+  }
+
+  .watch-emoji {
+    font-size: 2.8rem;
+    line-height: 1;
+  }
+
+  .watch-body {
+    font-weight: 300;
+    font-size: 0.95rem;
+    line-height: 1.85;
+    color: var(--ink-soft);
+    max-width: 320px;
+  }
+
+  /* ── Slide transición de año ── */
+  .slide--year {
+    background:
+      radial-gradient(ellipse 80% 70% at 50% 50%, rgba(201,169,110,0.1) 0%, transparent 65%),
+      radial-gradient(ellipse 60% 50% at 20% 80%, rgba(250,207,222,0.25) 0%, transparent 55%);
+  }
+
+  .slide-inner--year {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 1.6rem;
+    max-width: 500px;
+    margin: 0 auto;
+  }
+
+  .year-top {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .year-tag {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 300;
+    font-size: 0.72rem;
+    letter-spacing: 0.3em;
+    padding: 0.3rem 0.9rem;
+    border-radius: 9999px;
+  }
+
+  .year-tag--old {
+    color: #aaa;
+    border: 1px solid rgba(180,180,180,0.3);
+    text-decoration: line-through;
+    opacity: 0.6;
+  }
+
+  .year-tag--new {
+    color: var(--gold);
+    border: 1px solid rgba(201,169,110,0.5);
+  }
+
+  .year-arrow {
+    color: #ccc;
+    font-size: 0.8rem;
+  }
+
+  .year-title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(2rem, 6vw, 3.2rem);
+    font-weight: 600;
+    line-height: 1.15;
+    color: var(--ink);
+  }
+
+  .year-title em {
+    font-style: italic;
+    color: var(--gold);
+  }
+
+  .year-body {
+    font-weight: 300;
+    font-size: 0.95rem;
+    line-height: 1.8;
+    color: var(--ink-soft);
+  }
+
+  .year-btn {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 300;
+    font-size: 0.82rem;
+    letter-spacing: 0.22em;
+    text-decoration: none;
+    color: var(--gold);
+    border: 1px solid rgba(201,169,110,0.45);
+    padding: 0.75rem 2.4rem;
+    border-radius: 9999px;
+    margin-top: 0.5rem;
+    transition: background 0.25s, border-color 0.25s, box-shadow 0.25s;
+  }
+
+  .year-btn:hover {
+    background: rgba(201,169,110,0.1);
+    border-color: var(--gold);
+    box-shadow: 0 6px 20px rgba(201,169,110,0.22);
+  }
+
+  /* ── Coming soon — año 26 ── */
+  .slide--coming {
+    opacity: 0.45;
+    pointer-events: none;
+    background: none;
+  }
+
+  .coming-num {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 0.72rem;
+    font-style: italic;
+    letter-spacing: 0.3em;
+    color: var(--ink-soft);
+  }
+
+  .coming-title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 400;
+    font-style: italic;
+    color: var(--ink-soft);
+  }
+
+  .coming-body {
+    font-weight: 300;
+    font-size: 0.9rem;
+    color: var(--ink-soft);
+    opacity: 0.7;
+  }
+
+  /* ── Responsive: tablet ── */
+  @media (max-width: 900px) {
+    .slide-inner--hero,
+    .slide--split .slide-inner,
+    .slide--split-rev .slide-inner {
+      grid-template-columns: 1fr;
+    }
+
+    .slide {
+      padding: 2rem 2rem 2rem 2rem;
+      height: auto;
+      min-height: 100svh;
+      align-items: flex-start;
+      padding-top: 4rem;
+    }
+
+    .slide--split-rev .slide-inner img { order: -1; }
+
+    .hero-img     { height: 260px; }
+    .section-img  { height: 200px; }
+
+    .shops-grid { grid-template-columns: repeat(3, 1fr); max-width: 100%; }
+  }
+
+  /* ── Responsive: iPhone 15 Pro Max (430px) ── */
+  @media (max-width: 480px) {
+    html {
+      /* En iOS Safari 100vh no incluye la barra de dirección — usamos svh */
+      scroll-snap-type: y proximity;
+    }
+
+    .slide {
+      min-height: 100svh;
+      height: auto;
+      padding: 5rem 1.4rem 6rem;
+      align-items: flex-start;
+      justify-content: flex-start;
+    }
+
+    .slide-inner { gap: 1.6rem; }
+
+    .hero-title { font-size: 2rem; }
+    .hero-body  { font-size: 0.93rem; }
+    .hero-img   { height: 220px; border-radius: 14px; }
+
+    .section-title { font-size: 1.5rem; }
+    .section-body  { font-size: 0.93rem; }
+    .section-img   { height: 180px; border-radius: 12px; }
+
+    .shops-grid {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.6rem;
+      max-width: 100%;
+    }
+
+    .slide--btns { min-height: 100svh; justify-content: center; }
+    .cta-btn { font-size: 0.85rem; padding: 0.75rem 2rem; width: 100%; text-align: center; }
+    .cta-stack { width: 100%; max-width: 280px; }
+  }
+</style>

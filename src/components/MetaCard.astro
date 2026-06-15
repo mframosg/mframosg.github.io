@@ -1,0 +1,60 @@
+---
+/**
+ * MetaCard — shows a small info card with label/value rows.
+ * Used in moment slides (desayuno, almuerzo) to show hora/lugar/pista.
+ *
+ * Props:
+ *   items — array of { label: string; value: string }
+ */
+interface Props {
+  items: Array<{ label: string; value: string }>;
+}
+
+const { items } = Astro.props;
+---
+
+<div class="meta-card">
+  {items.map(({ label, value }) => (
+    <div class="meta-row">
+      <span class="meta-label">{label}</span>
+      <span>{value}</span>
+    </div>
+  ))}
+</div>
+
+<style>
+  .meta-card {
+    border: 1px solid rgba(240, 160, 180, 0.3);
+    border-radius: 14px;
+    padding: 1rem 1.2rem;
+    background: rgba(255, 245, 248, 0.7);
+    display: flex;
+    flex-direction: column;
+    gap: 0.55rem;
+    margin-top: 0.8rem;
+    backdrop-filter: blur(8px);
+  }
+
+  .meta-row {
+    display: flex;
+    gap: 1rem;
+    font-size: 0.87rem;
+    color: #444;
+    align-items: baseline;
+  }
+
+  .meta-label {
+    font-weight: 500;
+    color: var(--rose-deep);
+    min-width: 3.5rem;
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    opacity: 0.75;
+  }
+
+  @media (max-width: 480px) {
+    .meta-card { padding: 0.85rem 1rem; }
+    .meta-row  { font-size: 0.83rem; }
+  }
+</style>

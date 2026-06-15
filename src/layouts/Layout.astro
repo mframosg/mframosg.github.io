@@ -1,107 +1,119 @@
 ---
 interface Props {
-	title: string;
+  title: string;
+  description?: string;
+  /**
+   * fullPage: when true, renders the slot directly without the white card <main> container.
+   * Use this for pages that manage their own full-viewport layout (index, para-siempre).
+   * Leave false (default) for pages that want the centered card layout (secret).
+   */
+  fullPage?: boolean;
 }
 
-const { title } = Astro.props;
+const { title, description = "Cumpleaños especial", fullPage = false } = Astro.props;
 ---
 
 <!doctype html>
-<html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="description" content="Astro description" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/huella.png" />
-		<meta name="generator" content={Astro.generator} />
-		<link rel="preconnect" href="https://fonts.googleapis.com">
-		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-		<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&display=swap" rel="stylesheet">
-		<title>{title}</title>
-	</head>
-	<body>
-		<main>
-			<slot />
-		</main>
-	</body>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <link rel="icon" type="image/svg+xml" href="/huella.png" />
+    <meta name="generator" content={Astro.generator} />
+
+    <!-- Google Fonts — Playfair Display + Poppins -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400;1,600&family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&display=swap"
+      rel="stylesheet"
+    />
+
+    <title>{title}</title>
+  </head>
+  <body>
+    {fullPage ? <slot /> : <main><slot /></main>}
+  </body>
 </html>
+
 <style is:global>
-	:root {
-		--accent: #f06292;
-		--accent-light: #facfde;
-		--accent-dark: #a84466;
-		--accent-gradient: linear-gradient(
-			135deg,
-			var(--accent),
-			var(--accent-light) 40%,
-			#ffffff 100%
-		);
-	}
-	::-webkit-scrollbar {
-		width: 0px;
-	}
+  /* ── Design tokens ───────────────────────────────────────
+     Edit these variables to retheme the entire site at once.
+     ──────────────────────────────────────────────────────── */
+  :root {
+    /* Brand colors */
+    --rose:       #f06292;
+    --rose-pale:  #facfde;
+    --rose-deep:  #a84466;
+    --gold:       #c9a96e;
+    --ink:        #1f1f1f;
+    --ink-soft:   #666;
+    --cream:      #fdf2f8;
 
-	/* Track */
-	::-webkit-scrollbar-track {
-	background: transparent;
-	}
+    /* Legacy aliases used by secret.astro via Layout */
+    --accent:          #f06292;
+    --accent-light:    #facfde;
+    --accent-dark:     #a84466;
+    --accent-gradient: linear-gradient(135deg, var(--accent), var(--accent-light) 40%, #ffffff 100%);
+  }
 
-	/* Handle */
-	::-webkit-scrollbar-thumb {
-		background: transparent;
-	}
+  /* ── Reset / base ─────────────────────────────────────── */
+  *, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
 
-	/* Handle on hover */
-	::-webkit-scrollbar-thumb:hover {
-		background: transparent;
-	}
-		
-	html {
-		font-family: 'Poppins', sans-serif;
-		background-color: #fdf2f8;
-		scroll-behavior: smooth;
-	}
-	body {
-		margin: 0;
-		min-height: 100vh;
-		background:
-			radial-gradient(circle at top left, rgba(250, 207, 222, 0.9), transparent 55%),
-			radial-gradient(circle at bottom right, rgba(240, 98, 146, 0.15), #ffffff);
-		color: #111827;
-	}
-	code {
-		font-family:
-			Menlo,
-			Monaco,
-			Lucida Console,
-			Liberation Mono,
-			DejaVu Sans Mono,
-			Bitstream Vera Sans Mono,
-			Courier New,
-			monospace;
-	}
-	main {
-		max-width: 1120px;
-		margin: 0 auto;
-		min-height: 100vh;
-		padding: 5rem 1.5rem 4rem;
-		background: rgba(255, 255, 255, 0.92);
-		border-radius: 1.75rem;
-		box-shadow: 0 24px 60px rgba(15, 23, 42, 0.18);
-		overflow-x: hidden;
-	}
+  /* Hide scrollbar globally */
+  ::-webkit-scrollbar               { width: 0px; }
+  ::-webkit-scrollbar-track         { background: transparent; }
+  ::-webkit-scrollbar-thumb         { background: transparent; }
+  ::-webkit-scrollbar-thumb:hover   { background: transparent; }
 
-	@media (min-width: 1024px) {
-		main {
-			padding: 5rem 3rem 4rem;
-			padding-left: 7rem;
-		}
-	}
+  html {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--cream);
+    scroll-behavior: smooth;
+  }
 
-	@media (max-width: 640px) {
-		main {
-			padding: 4.5rem 1.25rem 3rem;
-			border-radius: 1.25rem;
-		}
-	}
+  body {
+    margin: 0;
+    min-height: 100vh;
+    background:
+      radial-gradient(circle at top left,    rgba(250, 207, 222, 0.9), transparent 55%),
+      radial-gradient(circle at bottom right, rgba(240, 98, 146, 0.15), #ffffff);
+    color: var(--ink);
+  }
+
+  code {
+    font-family: Menlo, Monaco, 'Lucida Console', 'Liberation Mono',
+      'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', 'Courier New', monospace;
+  }
+
+  /* ── Card <main> — used by secret.astro (fullPage=false) ─ */
+  main {
+    max-width: 1120px;
+    margin: 0 auto;
+    min-height: 100vh;
+    padding: 5rem 1.5rem 4rem;
+    background: rgba(255, 255, 255, 0.92);
+    border-radius: 1.75rem;
+    box-shadow: 0 24px 60px rgba(15, 23, 42, 0.18);
+    overflow-x: hidden;
+  }
+
+  @media (min-width: 1024px) {
+    main {
+      padding: 5rem 3rem 4rem;
+      padding-left: 7rem;
+    }
+  }
+
+  @media (max-width: 640px) {
+    main {
+      padding: 4.5rem 1.25rem 3rem;
+      border-radius: 1.25rem;
+    }
+  }
 </style>
