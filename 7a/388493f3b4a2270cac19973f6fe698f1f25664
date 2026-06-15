@@ -1,0 +1,19 @@
+src/pages/para-siempre.astro
+  s_672f1ae76d4942::t_7b4af7fcc588c4 492
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.7",
+  "base_commit_sha": "7a388493f3b4a2270cac19973f6fe698f1f25664",
+  "prompts": {},
+  "sessions": {
+    "s_672f1ae76d4942": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "97a712d2-f344-4c23-9abc-bdeb4d7ff4d5",
+        "model": "claude-sonnet-4-6"
+      },
+      "human_author": "mframosg <mframosg@eafit.edu.co>"
+    }
+  }
+}
