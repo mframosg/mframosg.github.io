@@ -1,254 +1,535 @@
 ---
-import Layout from '../layouts/Layout.astro';
 import Card from '../components/Card.astro';
-import Title from '../components/Title.astro';
 import SideBar from '../components/SideBar.astro';
-import Button from '../components/Button.astro';
 ---
 
-<Layout title="Cumpleaños 23">
-	<SideBar />
-	<section id="momento0" class="hero">
-		<Title>Lista de actividades para mi pequeña Golden Retriever</Title>
-		<div class="hero-grid">
-			<div class="hero-text">
-				<p class="hero-kicker">¡Feliz cumpleaños! 🎉</p>
-				<p>
-					Para celebrar tu día, he preparado un día especial con actividades.
-					¡Espero que disfrutes de cada momento! 🎂🎈
-				</p>
-				<p class="hero-note">¡Ajam! ¡Esa golden chitita eres tú! 🐶</p>
-			</div>
-			<figure class="hero-media">
-				<img src="golden1.jpeg" alt="Golden Retriever" />
-			</figure>
-		</div>
-	</section>
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cumpleaños 23</title>
+  <link rel="icon" href="/huella.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400;1,600&family=Poppins:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-	<!-- Momento 1: Desayuno -->
-	<section id="momento1" class="moment">
-		<Title>Desayuno</Title>
-		<div class="moment-content">
-			<div class="moment-text">
-				<p>
-					Para comenzar este día especial, te he preparado un desayuno sorpresa.
-					¡Espero que te guste!
-				</p>
-				<p class="meta">
-					<strong>Hora:</strong> 8:00 a.m. <br />
-					<strong>Lugar:</strong> Mi casa. <br />
-					<strong>Pista:</strong> Tú me has enseñado a prepararlo.
-				</p>
-			</div>
-			<figure class="moment-media">
-				<img src="desayuno.png" alt="Desayuno" />
-			</figure>
-		</div>
-	</section>
+    :root {
+      --rose:      #f06292;
+      --rose-pale: #facfde;
+      --rose-deep: #a84466;
+      --gold:      #c9a96e;
+      --ink:       #1f1f1f;
+      --ink-soft:  #666;
+      --cream:     #fdf2f8;
+    }
 
-	<!-- Momento 2: Mapa de Tiendas -->
-	<section id="momento2" class="moment">
-		<Title>¡Nos vamos de compras!</Title>
-		<div class="moment-content moment-content--reverse">
-			<div class="moment-text">
-				<p>
-					Ahora iremos de compras. ¡Para ello tengo las siguientes recomendaciones!
-				</p>
-				<p>
-					Me gusta darte regalos que tengan utilidad y no cosas por regalar,
-					por eso este regalo está pensado en tus necesidades y gustos.
-					Te doy las siguientes opciones: <br />
-					De One Half me gustaría para ti un short y medias para entrenar, tampoco descartes algo urban,
-					de Roxswim una falda que es un antojo que tienes desde hace rato, y de Stradivarius,
-					aunque no tengo algo particular en mente, un jean nunca sobra. <br />
-					¡SI TIENES OTRAS OPCIONES POR FAVOR NO LAS OMITAS!
-				</p>
-			</div>
-			<div class="moment-media">
-				<ul class="shops-grid">
-					<Card href='https://onehalf.com.co/collections/inferiores-deportivos?page=1' imgSrc='https://cdn.shopify.com/s/files/1/0257/9981/9345/files/logo-amarillo-one-half_5bdbbf39-5b26-40c1-b8ec-45b4431ab99c.png' />
-					<Card href='https://roxieswimwear.com/products/falda-girly-negro' imgSrc='https://roxieswimwear.com/cdn/shop/files/LogoRoxSwim_Mesa_de_trabajo_1.png?v=1714681715' />
-					<Card href='https://www.stradivarius.com/co/mujer/ropa/jeans-n1953' imgSrc= 'https://www.cabosagroup.com/wp-content/uploads/2018/05/logo-stradivarius-300x97.png' />
-				</ul>
-			</div>
-		</div>
-	</section>
+    html {
+      scroll-snap-type: y mandatory;
+      scroll-behavior: smooth;
+      overflow-y: scroll;
+      height: 100%;
+    }
 
-	<!-- Momento 3: Almuerzo -->
-	<section id="momento3" class="moment">
-		<Title>¡Tiempo de Almuerzo!</Title>
-		<div class="moment-content">
-			<div class="moment-text">
-				<p>
-					Para continuar el día, vamos a almorzar. También es sorpresa ¡Ajam! sorpresa.
-				</p>
-				<p class="meta">
-					<strong>Hora:</strong> 12:30 p.m. <br />
-					<strong>Lugar:</strong> Solo déjate llevar <br />
-					<strong>Pista:</strong> Lo comemos mucho, o tal vez sea la primera vez.
-				</p>
-			</div>
-			<figure class="moment-media">
-				<img src="almuerzo.png" alt="Desayuno" />
-			</figure>
-		</div>
-	</section>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: var(--cream);
+      color: var(--ink);
+      height: 100%;
+      background-image:
+        radial-gradient(ellipse 80% 60% at 20% 0%, rgba(250,207,222,0.7) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 50% at 80% 100%, rgba(240,98,146,0.1) 0%, transparent 60%);
+    }
 
-	<!-- Momento 4: Compartir en Familia -->
-	<section id="momento4" class="moment">
-		<Title>Compartir en familia</Title>
-		<div class="moment-content">
-			<div class="moment-text">
-				<p>
-					Terminaremos este día especial compartiendo tarde en familia.
-				</p>
-				<p>
-					Pero antes por aquí te dejo un botón secreto.
-				</p>
-				<Button href="/secret" text="Botón secreto 🎁" />
-			</div>
-			<figure class="moment-media">
-				<img src="family.jpeg" alt="Compartir en Familia" />
-			</figure>
-		</div>
-	</section>
+    /* ── SNAP SECTIONS ── */
+    .slide {
+      height: 100vh;
+      scroll-snap-align: start;
+      scroll-snap-stop: always;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem 5rem 2rem 7rem;
+      position: relative;
+      border-bottom: 1px solid rgba(240, 160, 180, 0.15);
+    }
 
-</Layout>
+    .slide-inner {
+      width: 100%;
+      max-width: 1060px;
+      display: grid;
+      gap: 3rem;
+      align-items: center;
+    }
 
-<style>
-	section {
-		max-width: 1120px;
-		margin: 2.5rem auto;
-		padding: 0 1.5rem;
-	}
+    /* ── SLIDE 0: HERO ── */
+    #momento0 .slide-inner {
+      grid-template-columns: 1fr 400px;
+    }
 
-	.hero {
-		margin-top: 1.5rem;
-	}
+    .hero-eyebrow {
+      font-size: 0.72rem;
+      font-weight: 300;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--rose-deep);
+      opacity: 0.65;
+      margin-bottom: 1.2rem;
+    }
 
-	.hero-grid {
-		display: grid;
-		grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
-		gap: 2.5rem;
-		align-items: center;
-	}
+    .hero-title {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(2.2rem, 5vw, 3.6rem);
+      font-weight: 600;
+      line-height: 1.12;
+      color: var(--ink);
+      margin-bottom: 1.4rem;
+    }
 
-	.hero-text p {
-		margin-top: 0.9rem;
-		margin-bottom: 0.4rem;
-		font-size: 1.1rem;
-		line-height: 1.7;
-		color: #4b5563;
-	}
+    .hero-title em {
+      font-style: italic;
+      color: var(--rose-deep);
+    }
 
-	.hero-kicker {
-		font-size: 1.2rem;
-		font-weight: 600;
-		color: var(--accent-dark);
-	}
+    .hero-body {
+      font-weight: 300;
+      font-size: 1rem;
+      line-height: 1.8;
+      color: var(--ink-soft);
+      max-width: 400px;
+    }
 
-	.hero-note {
-		margin-top: 1.2rem;
-		font-weight: 500;
-		color: #9f1239;
-	}
+    .hero-img {
+      width: 100%;
+      height: 420px;
+      object-fit: cover;
+      object-position: center 30%;
+      border-radius: 20px;
+      box-shadow: 0 20px 50px rgba(15,23,42,0.18);
+    }
 
-	.hero-media img {
-		width: 100%;
-		max-height: 360px;
-		object-fit: cover;
-		border-radius: 24px;
-		box-shadow: 0 16px 40px rgba(15, 23, 42, 0.28);
-		transition: transform 0.25s ease, box-shadow 0.25s ease;
-	}
+    .hero-img--illustration {
+      object-fit: contain;
+      object-position: center;
+      box-shadow: none;
+      filter: drop-shadow(0 12px 30px rgba(240,98,146,0.18));
+    }
 
-	.hero-media img:hover {
-		transform: translateY(-4px) scale(1.02);
-		box-shadow: 0 24px 60px rgba(15, 23, 42, 0.32);
-	}
+    /* ── SLIDE 1, 3: text + image ── */
+    .slide--split .slide-inner {
+      grid-template-columns: 1fr 320px;
+    }
 
-	.moment {
-		margin-top: 3rem;
-	}
+    /* ── SLIDE 2: compras (full width text + cards below) ── */
+    .slide--shops .slide-inner {
+      grid-template-columns: 1fr;
+      gap: 1.8rem;
+    }
 
-	.moment-content {
-		display: grid;
-		grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
-		gap: 2.25rem;
-		align-items: flex-start;
-	}
+    /* ── SLIDE 4: familia ── */
+    .slide--split-rev .slide-inner {
+      grid-template-columns: 320px 1fr;
+    }
 
-	.moment-content--reverse .moment-text {
-		order: 2;
-	}
+    /* ── Section label ── */
+    .section-eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      margin-bottom: 1rem;
+    }
 
-	.moment-content--reverse .moment-media {
-		order: 1;
-	}
+    .section-num {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 0.72rem;
+      font-style: italic;
+      color: var(--rose-deep);
+      opacity: 0.5;
+    }
 
-	.moment-text p {
-		margin-top: 0.9rem;
-		margin-bottom: 0.4rem;
-		font-size: 1.1rem;
-		line-height: 1.7;
-		color: #374151;
-		background: rgba(250, 207, 222, 0.4);
-		padding: 0.85rem 1.25rem;
-		border-radius: 1.25rem;
-	}
+    .section-line {
+      width: 2rem;
+      height: 1px;
+      background: var(--rose-deep);
+      opacity: 0.25;
+    }
 
-	.moment-text p.meta {
-		background: rgba(250, 207, 222, 0.7);
-		font-weight: 500;
-	}
+    /* ── Section title ── */
+    .section-title {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+      font-weight: 600;
+      font-style: italic;
+      color: var(--rose-deep);
+      line-height: 1.2;
+      margin-bottom: 1.2rem;
+    }
 
-	.moment-media img {
-		width: 100%;
-		border-radius: 20px;
-		box-shadow: 0 12px 32px rgba(15, 23, 42, 0.2);
-		transition: transform 0.25s ease, box-shadow 0.25s ease;
-	}
+    /* ── Body text ── */
+    .section-body {
+      font-weight: 300;
+      font-size: 0.97rem;
+      line-height: 1.8;
+      color: #555;
+      margin-bottom: 1rem;
+    }
 
-	.moment-media img:hover {
-		transform: translateY(-3px) scale(1.01);
-		box-shadow: 0 18px 45px rgba(15, 23, 42, 0.28);
-	}
+    .section-sub {
+      font-size: 0.82rem;
+      font-style: italic;
+      color: #aaa;
+      margin-bottom: 1.2rem;
+    }
 
-	.shops-grid {
-		list-style: none;
-		padding-left: 0;
-		margin-top: 1.5rem;
-		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-		gap: 1.25rem;
-	}
+    /* ── Meta card ── */
+    .meta-card {
+      border: 1px solid rgba(240,160,180,0.3);
+      border-radius: 14px;
+      padding: 1rem 1.2rem;
+      background: rgba(255,245,248,0.7);
+      display: flex;
+      flex-direction: column;
+      gap: 0.55rem;
+      margin-top: 0.8rem;
+      backdrop-filter: blur(8px);
+    }
 
-	@media (max-width: 900px) {
-		.hero-grid,
-		.moment-content {
-			grid-template-columns: minmax(0, 1fr);
-		}
+    .meta-row {
+      display: flex;
+      gap: 1rem;
+      font-size: 0.87rem;
+      color: #444;
+      align-items: baseline;
+    }
 
-		.moment-content--reverse .moment-text,
-		.moment-content--reverse .moment-media {
-			order: initial;
-		}
-	}
+    .meta-label {
+      font-weight: 500;
+      color: var(--rose-deep);
+      min-width: 3.5rem;
+      font-size: 0.72rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      opacity: 0.75;
+    }
 
-	@media (max-width: 640px) {
-		section {
-			margin: 2rem auto;
-			padding: 0 1.1rem;
-		}
+    /* ── Section image ── */
+    .section-img {
+      width: 100%;
+      height: 320px;
+      object-fit: cover;
+      border-radius: 16px;
+      box-shadow: 0 12px 36px rgba(15,23,42,0.14);
+    }
 
-		.hero-media img,
-		.moment-media img {
-			max-height: none;
-		}
+    /* ── Shops ── */
+    .shops-intro {
+      font-weight: 300;
+      font-size: 0.97rem;
+      line-height: 1.8;
+      color: #555;
+      max-width: 640px;
+    }
 
-		.moment-text p {
-			font-size: 1rem;
-		}
-	}
-	
-</style>
+    .shops-grid {
+      list-style: none;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      max-width: 640px;
+    }
+
+    .shops-note {
+      font-size: 0.8rem;
+      font-style: italic;
+      color: #bbb;
+      margin-top: 0.4rem;
+    }
+
+    /* ── Slide transición de año ── */
+    .slide--year {
+      background:
+        radial-gradient(ellipse 80% 70% at 50% 50%, rgba(201,169,110,0.1) 0%, transparent 65%),
+        radial-gradient(ellipse 60% 50% at 20% 80%, rgba(250,207,222,0.25) 0%, transparent 55%);
+    }
+
+    .slide-inner--year {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 1.6rem;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+    .year-top {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .year-tag {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 300;
+      font-size: 0.72rem;
+      letter-spacing: 0.3em;
+      padding: 0.3rem 0.9rem;
+      border-radius: 9999px;
+    }
+
+    .year-tag--old {
+      color: #aaa;
+      border: 1px solid rgba(180,180,180,0.3);
+      text-decoration: line-through;
+      opacity: 0.6;
+    }
+
+    .year-tag--new {
+      color: var(--gold);
+      border: 1px solid rgba(201,169,110,0.5);
+    }
+
+    .year-arrow {
+      color: #ccc;
+      font-size: 0.8rem;
+    }
+
+    .year-title {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(2rem, 6vw, 3.2rem);
+      font-weight: 600;
+      line-height: 1.15;
+      color: var(--ink);
+    }
+
+    .year-title em {
+      font-style: italic;
+      color: var(--gold);
+    }
+
+    .year-body {
+      font-weight: 300;
+      font-size: 0.95rem;
+      line-height: 1.8;
+      color: var(--ink-soft);
+    }
+
+    .year-btn {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 300;
+      font-size: 0.82rem;
+      letter-spacing: 0.22em;
+      text-decoration: none;
+      color: var(--gold);
+      border: 1px solid rgba(201,169,110,0.45);
+      padding: 0.75rem 2.4rem;
+      border-radius: 9999px;
+      margin-top: 0.5rem;
+      transition: background 0.25s, border-color 0.25s, box-shadow 0.25s;
+    }
+
+    .year-btn:hover {
+      background: rgba(201,169,110,0.1);
+      border-color: var(--gold);
+      box-shadow: 0 6px 20px rgba(201,169,110,0.22);
+    }
+
+    .year-btn-secondary {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 300;
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      text-decoration: none;
+      color: #bbb;
+      border-bottom: 1px solid rgba(180,180,180,0.3);
+      padding-bottom: 1px;
+      transition: color 0.2s, border-color 0.2s;
+    }
+
+    .year-btn-secondary:hover {
+      color: #888;
+      border-color: #888;
+    }
+
+    /* ── Responsive: tablet ── */
+    @media (max-width: 900px) {
+      #momento0 .slide-inner,
+      .slide--split .slide-inner,
+      .slide--split-rev .slide-inner {
+        grid-template-columns: 1fr;
+      }
+
+      .slide {
+        padding: 2rem 2rem 2rem 2rem;
+        height: auto;
+        min-height: 100svh;
+        align-items: flex-start;
+        padding-top: 4rem;
+      }
+
+      .slide--split-rev .slide-inner img { order: -1; }
+
+      .hero-img { height: 260px; }
+      .section-img { height: 200px; }
+
+      .shops-grid { grid-template-columns: repeat(3, 1fr); max-width: 100%; }
+    }
+
+    /* ── Responsive: iPhone 15 Pro Max (430px) ── */
+    @media (max-width: 480px) {
+      html {
+        /* En iOS Safari 100vh no incluye la barra de dirección — usamos svh */
+        scroll-snap-type: y proximity;
+      }
+
+      .slide {
+        min-height: 100svh;
+        height: auto;
+        padding: 5rem 1.4rem 6rem;
+        align-items: flex-start;
+        justify-content: flex-start;
+      }
+
+      .slide-inner { gap: 1.6rem; }
+
+      .hero-title { font-size: 2rem; }
+      .hero-body  { font-size: 0.93rem; }
+      .hero-img   { height: 220px; border-radius: 14px; }
+
+      .section-title { font-size: 1.5rem; }
+      .section-body  { font-size: 0.93rem; }
+      .section-img   { height: 180px; border-radius: 12px; }
+
+      .shops-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 0.6rem;
+        max-width: 100%;
+      }
+
+      .meta-card { padding: 0.85rem 1rem; }
+      .meta-row  { font-size: 0.83rem; }
+
+      .slide--btns { min-height: 100svh; justify-content: center; }
+      .btns-eyebrow { font-size: 1rem; }
+      .cta-btn { font-size: 0.85rem; padding: 0.75rem 2rem; width: 100%; text-align: center; }
+      .cta-stack { width: 100%; max-width: 280px; }
+    }
+  </style>
+</head>
+<body>
+
+  <SideBar />
+
+  <!-- 00 · HERO -->
+  <section id="momento0" class="slide">
+    <div class="slide-inner">
+      <div>
+        <p class="hero-eyebrow">16 de junio</p>
+        <h1 class="hero-title">Feliz cumpleaños,<br /><em>mi Goldencito.</em></h1>
+        <p class="hero-body">
+          Preparé este día con mucho cuidado — cada momento tiene algo de ti.
+          Espero que lo disfrutes tanto como yo disfruté armarlo.
+        </p>
+      </div>
+      <img src="/golden1.jpeg" alt="Golden Retriever" class="hero-img" />
+    </div>
+  </section>
+
+  <!-- 01 · DESAYUNO -->
+  <section id="momento1" class="slide slide--split">
+    <div class="slide-inner">
+      <div>
+        <div class="section-eyebrow">
+          <span class="section-num">01</span>
+          <span class="section-line"></span>
+        </div>
+        <h2 class="section-title">Desayuno</h2>
+        <p class="section-body">Para comenzar este día especial, te he preparado un desayuno sorpresa.</p>
+        <div class="meta-card">
+          <div class="meta-row"><span class="meta-label">Hora</span><span>8:00 a.m.</span></div>
+          <div class="meta-row"><span class="meta-label">Lugar</span><span>Mi casa</span></div>
+          <div class="meta-row"><span class="meta-label">Pista</span><span>Tú me has enseñado a prepararlo</span></div>
+        </div>
+      </div>
+      <img src="desayuno.png" alt="Desayuno" class="section-img" />
+    </div>
+  </section>
+
+  <!-- 02 · COMPRAS -->
+  <section id="momento2" class="slide slide--shops">
+    <div class="slide-inner">
+      <div>
+        <div class="section-eyebrow">
+          <span class="section-num">02</span>
+          <span class="section-line"></span>
+        </div>
+        <h2 class="section-title">Nos vamos de compras</h2>
+        <p class="shops-intro">
+          Me gusta darte regalos con utilidad — este está pensado en tus gustos.
+          De One Half, un short y medias para entrenar; de Roxswim, esa falda que tienes en el ojo;
+          de Stradivarius, un jean nunca sobra.
+        </p>
+        <p class="shops-note">Si tienes otras opciones, no las omitas.</p>
+      </div>
+      <ul class="shops-grid">
+        <Card href='https://onehalf.com.co/collections/inferiores-deportivos?page=1' imgSrc='https://cdn.shopify.com/s/files/1/0257/9981/9345/files/logo-amarillo-one-half_5bdbbf39-5b26-40c1-b8ec-45b4431ab99c.png' />
+        <Card href='https://roxieswimwear.com/products/falda-girly-negro' imgSrc='https://roxieswimwear.com/cdn/shop/files/LogoRoxSwim_Mesa_de_trabajo_1.png?v=1714681715' />
+        <Card href='https://www.stradivarius.com/co/mujer/ropa/jeans-n1953' imgSrc='https://www.cabosagroup.com/wp-content/uploads/2018/05/logo-stradivarius-300x97.png' />
+      </ul>
+    </div>
+  </section>
+
+  <!-- 03 · ALMUERZO -->
+  <section id="momento3" class="slide slide--split">
+    <div class="slide-inner">
+      <div>
+        <div class="section-eyebrow">
+          <span class="section-num">03</span>
+          <span class="section-line"></span>
+        </div>
+        <h2 class="section-title">Tiempo de almuerzo</h2>
+        <p class="section-body">Para continuar el día, vamos a almorzar. También es sorpresa.</p>
+        <div class="meta-card">
+          <div class="meta-row"><span class="meta-label">Hora</span><span>12:30 p.m.</span></div>
+          <div class="meta-row"><span class="meta-label">Lugar</span><span>Solo déjate llevar</span></div>
+          <div class="meta-row"><span class="meta-label">Pista</span><span>Lo comemos mucho, o tal vez sea la primera vez</span></div>
+        </div>
+      </div>
+      <img src="almuerzo.png" alt="Almuerzo" class="section-img" />
+    </div>
+  </section>
+
+  <!-- 04 · FAMILIA -->
+  <section id="momento4" class="slide slide--split-rev" style="scroll-margin-top:0">
+    <div class="slide-inner">
+      <img src="family.jpeg" alt="Familia" class="section-img" />
+      <div>
+        <div class="section-eyebrow">
+          <span class="section-num">04</span>
+          <span class="section-line"></span>
+        </div>
+        <h2 class="section-title">Compartir en familia</h2>
+        <p class="section-body">Terminaremos este día especial compartiendo tarde en familia.</p>
+        <a href="/secret" class="year-btn" style="margin-top:1.4rem;display:inline-block;font-size:0.78rem;padding:0.6rem 1.6rem;color:var(--rose-deep);border-color:rgba(240,98,146,0.35);">sorpresa &thinsp;🎁</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 05 · TRANSICIÓN DE AÑO -->
+  <section class="slide slide--year">
+    <div class="slide-inner slide-inner--year">
+      <div class="year-top">
+        <span class="year-tag year-tag--old">2025</span>
+        <span class="year-arrow">→</span>
+        <span class="year-tag year-tag--new">2026</span>
+      </div>
+      <h2 class="year-title">Este año<br /><em>es diferente.</em></h2>
+      <p class="year-body">Todo lo anterior fue el año pasado.<br />Este año hay algo nuevo para ti.</p>
+      <a id="btn-forever" href="/para-siempre" class="year-btn">abrir &thinsp;✦</a>
+    </div>
+  </section>
+
+</body>
+</html>

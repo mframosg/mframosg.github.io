@@ -1,90 +1,236 @@
 ---
 ---
+
 <aside>
-    <a href="/">0</a>
-    <a href="#momento1">1</a>
-    <a href="#momento2">2</a>
-    <a href="#momento3">3</a>
-    <a href="#momento4">4</a>
+  <a href="/" aria-label="Inicio" data-tooltip="inicio">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M3 9.75L12 3l9 6.75V20a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9.75z"/>
+      <path d="M9 21V12h6v9"/>
+    </svg>
+  </a>
+
+  <span class="sep"></span>
+  <span class="year-label">24</span>
+
+  <a href="#momento1" aria-label="Desayuno" data-tooltip="desayuno">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M18 8h1a4 4 0 0 1 0 8h-1"/>
+      <path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/>
+      <line x1="6" y1="1" x2="6" y2="4"/>
+      <line x1="10" y1="1" x2="10" y2="4"/>
+      <line x1="14" y1="1" x2="14" y2="4"/>
+    </svg>
+  </a>
+
+  <a href="#momento2" aria-label="Compras" data-tooltip="compras">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
+      <line x1="3" y1="6" x2="21" y2="6"/>
+      <path d="M16 10a4 4 0 0 1-8 0"/>
+    </svg>
+  </a>
+
+  <a href="#momento3" aria-label="Almuerzo" data-tooltip="almuerzo">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M3 11l19-9-9 19-2-8-8-2z"/>
+    </svg>
+  </a>
+
+  <a href="#momento4" aria-label="Familia" data-tooltip="familia">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+    </svg>
+  </a>
+
+  <span class="sep"></span>
+  <span class="year-label year-label--new">25</span>
+
+  <a href="#btn-forever" aria-label="Para siempre" data-tooltip="para siempre" class="link-forever">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+      <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+    </svg>
+  </a>
 </aside>
+
 <style>
+  aside {
+    position: fixed;
+    left: 1.4rem;
+    top: 50%;
+    transform: translateY(-50%);
+    padding: 1.1rem 0.6rem;
+    background: rgba(255, 255, 255, 0.72);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(240, 180, 200, 0.25);
+    border-radius: 9999px;
+    box-shadow:
+      0 8px 32px rgba(192, 99, 125, 0.12),
+      0 1px 4px rgba(15, 23, 42, 0.06);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.3rem;
+    z-index: 20;
+  }
+
+  /* ── icon buttons ── */
+  a {
+    position: relative;
+    text-decoration: none;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 9999px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #c0637d;
+    background: transparent;
+    transition:
+      background 0.22s ease,
+      color 0.22s ease,
+      transform 0.22s ease,
+      box-shadow 0.22s ease;
+  }
+
+  a svg {
+    width: 1.1rem;
+    height: 1.1rem;
+    flex-shrink: 0;
+  }
+
+  a:hover,
+  a:focus-visible {
+    background: linear-gradient(135deg, #c0637d, #f973ab);
+    color: #fff;
+    transform: scale(1.08);
+    box-shadow: 0 6px 18px rgba(192, 99, 125, 0.38);
+    outline: none;
+  }
+
+  /* ── tooltip ── */
+  a::before {
+    content: attr(data-tooltip);
+    position: absolute;
+    left: calc(100% + 0.8rem);
+    top: 50%;
+    transform: translateY(-50%);
+    white-space: nowrap;
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.68rem;
+    font-weight: 400;
+    letter-spacing: 0.08em;
+    color: #6b4050;
+    background: rgba(255, 255, 255, 0.95);
+    border: 1px solid rgba(240, 180, 200, 0.4);
+    border-radius: 9999px;
+    padding: 0.22rem 0.65rem;
+    box-shadow: 0 4px 12px rgba(192, 99, 125, 0.12);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.18s ease, transform 0.18s ease;
+    translate: -4px 0;
+  }
+
+  a:hover::before {
+    opacity: 1;
+    translate: 0 0;
+  }
+
+  /* ── separator ── */
+  .sep {
+    display: block;
+    width: 1px;
+    height: 1rem;
+    background: linear-gradient(to bottom, transparent, rgba(240, 160, 180, 0.4), transparent);
+    margin: 0.1rem 0;
+  }
+
+  /* ── year labels ── */
+  .year-label {
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.55rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    color: #c0637d;
+    opacity: 0.45;
+    line-height: 1;
+    user-select: none;
+  }
+
+  .year-label--new {
+    color: #c9a96e;
+    opacity: 0.7;
+  }
+
+  /* ── para siempre: siempre con un toque especial ── */
+  a.link-forever {
+    color: #c9a96e;
+  }
+
+  a.link-forever:hover {
+    background: linear-gradient(135deg, #c9a96e, #e8c98a);
+    color: #fff;
+    box-shadow: 0 6px 18px rgba(201, 169, 110, 0.4);
+  }
+
+  /* ── active dot indicator ── */
+  a.active {
+    background: linear-gradient(135deg, #e8a0b4, #f06292);
+    color: #fff;
+    box-shadow: 0 4px 14px rgba(192, 99, 125, 0.3);
+  }
+
+  /* ── mobile: bottom bar ── */
+  @media (max-width: 768px) {
     aside {
-        position: fixed;
-        left: 1.5rem;
-        top: 50%;
-        transform: translateY(-50%);
-        padding: 1.25rem 0.75rem;
-        background: rgba(255, 255, 255, 0.95);
-        backdrop-filter: blur(18px);
-        border-radius: 9999px;
-        box-shadow: 0 18px 45px rgba(15, 23, 42, 0.25);
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 1rem;
-        z-index: 20;
-    }
-    a {
-        text-decoration: none;
-        position: relative;
-        width: 2.75rem;
-        height: 2.75rem;
-        background: transparent;
-        border: 2px solid var(--accent-dark);
-        border-radius: 9999px;
-        line-height: 0;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        font-weight: 700;
-        font-size: 1rem;
-        color: var(--accent-dark);
-        transition: background-color 0.2s ease, color 0.2s ease,
-            transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
-    }
-    a::after {
-        content: "";
-        position: absolute;
-        top: 100%;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 2px;
-        height: 1.4rem;
-        background: rgba(248, 113, 150, 0.4);
-    }
-    aside a:last-child::after {
-        display: none;
+      left: 50%;
+      bottom: 1.2rem;
+      top: auto;
+      transform: translateX(-50%);
+      flex-direction: row;
+      padding: 0.6rem 1rem;
+      gap: 0.2rem;
+      border-radius: 9999px;
     }
 
-    a:hover,
-    a:focus-visible {
-        background: var(--accent-dark);
-        color: var(--accent-light);
-        border-color: transparent;
-        transform: translateY(-1px) scale(1.03);
-        box-shadow: 0 14px 30px rgba(148, 27, 74, 0.35);
-        outline: none;
+    .sep {
+      width: 1.2rem;
+      height: 1px;
+      background: linear-gradient(to right, transparent, rgba(240, 160, 180, 0.5), transparent);
+      margin: 0 0.1rem;
     }
 
-    @media (max-width: 768px) {
-        aside {
-            left: 50%;
-            bottom: 1.5rem;
-            top: auto;
-            transform: translateX(-50%);
-            flex-direction: row;
-            padding: 0.75rem 1.25rem;
-            gap: 0.75rem;
-        }
+    a::before { display: none; }
+    .year-label { display: none; }
 
-        a {
-            width: 2.25rem;
-            height: 2.25rem;
-            font-size: 0.85rem;
-        }
-
-        a::after {
-            display: none;
-        }
+    a svg {
+      width: 1rem;
+      height: 1rem;
     }
+  }
 </style>
+
+<script>
+  // Marca el link activo según la sección visible
+  const sections = ['momento1', 'momento2', 'momento3', 'momento4'];
+  const links = document.querySelectorAll('aside a[href^="#"]');
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          links.forEach((l) => l.classList.remove('active'));
+          const active = document.querySelector(`aside a[href="#${entry.target.id}"]`);
+          if (active) active.classList.add('active');
+        }
+      });
+    },
+    { threshold: 0.45 }
+  );
+
+  sections.forEach((id) => {
+    const el = document.getElementById(id);
+    if (el) observer.observe(el);
+  });
+</script>
