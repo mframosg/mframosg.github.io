@@ -247,6 +247,69 @@ import SideBar from '../components/SideBar.astro';
       margin-top: 0.4rem;
     }
 
+    /* ── Slide Apple Watch ── */
+    .slide--watch {
+      background: radial-gradient(ellipse 70% 60% at 50% 50%, rgba(180,180,210,0.1) 0%, transparent 65%);
+    }
+
+    .slide-inner--watch {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 1.4rem;
+      max-width: 420px;
+      margin: 0 auto;
+    }
+
+    .watch-year {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 0.72rem;
+      font-style: italic;
+      color: #a0a0c0;
+      opacity: 0.6;
+      letter-spacing: 0.2em;
+    }
+
+    .watch-ornament {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+
+    .watch-line {
+      width: 2.5rem;
+      height: 1px;
+      background: linear-gradient(to right, transparent, rgba(160,160,192,0.3));
+    }
+
+    .watch-line:last-child {
+      background: linear-gradient(to left, transparent, rgba(160,160,192,0.3));
+    }
+
+    .watch-dot {
+      font-size: 0.6rem;
+      color: #a0a0c0;
+      opacity: 0.5;
+    }
+
+    .watch-title {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(1.8rem, 5vw, 2.8rem);
+      font-weight: 600;
+      font-style: italic;
+      color: var(--ink);
+      line-height: 1.2;
+    }
+
+    .watch-body {
+      font-weight: 300;
+      font-size: 0.95rem;
+      line-height: 1.85;
+      color: var(--ink-soft);
+      max-width: 320px;
+    }
+
     /* ── Slide transición de año ── */
     .slide--year {
       background:
@@ -514,6 +577,24 @@ import SideBar from '../components/SideBar.astro';
         <p class="section-body">Terminaremos este día especial compartiendo tarde en familia.</p>
         <a href="/secret" class="year-btn" style="margin-top:1.4rem;display:inline-block;font-size:0.78rem;padding:0.6rem 1.6rem;color:var(--rose-deep);border-color:rgba(240,98,146,0.35);">sorpresa &thinsp;🎁</a>
       </div>
+    </div>
+  </section>
+
+  <!-- 04.5 · APPLE WATCH -->
+  <section id="momento-watch" class="slide slide--watch">
+    <div class="slide-inner slide-inner--watch">
+      <div class="watch-year">24</div>
+      <div class="watch-ornament">
+        <span class="watch-line"></span>
+        <span class="watch-dot">◇</span>
+        <span class="watch-line"></span>
+      </div>
+      <h2 class="watch-title">Un Apple Watch</h2>
+      <p class="watch-body">
+        Este año el regalo fue uno que llevas puesto —
+        para que cada vez que lo mires sepas que alguien
+        pensó mucho en ti al elegirlo.
+      </p>
     </div>
   </section>
 
